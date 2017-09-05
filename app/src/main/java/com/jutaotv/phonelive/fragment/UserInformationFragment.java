@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.jutaotv.phonelive.AppConfig;
@@ -38,13 +39,15 @@ import okhttp3.Call;
  * 登录用户中心页面
  */
 public class UserInformationFragment extends BaseFragment {
-
     //头像
     @InjectView(R.id.iv_avatar)
     AvatarView mIvAvatar;
     //昵称
     @InjectView(R.id.tv_name)
     TextView mTvName;
+
+    @InjectView(R.id.ll_info)
+    LinearLayout mLinearLayoutInfo;
 
     @InjectView(R.id.ll_user_container)
     View mUserContainer;
@@ -77,12 +80,22 @@ public class UserInformationFragment extends BaseFragment {
 
     private UserBean mInfo;
 
+
+    View.OnClickListener listener =new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+//            Toast.makeText(getContext(),"点击了这里",Toast.LENGTH_LONG).show();
+            UIHelper.showMyInfoDetailActivity(getContext());
+        }
+    };
+
     @Override
     public View onCreateView(LayoutInflater inflater,
             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_information,
                 container, false);
         ButterKnife.inject(this, view);
+        mLinearLayoutInfo.setOnClickListener(listener);
         initView(view);
         initData();
         return view;
@@ -227,6 +240,7 @@ public class UserInformationFragment extends BaseFragment {
             case R.id.tv_edit_info:
                 UIHelper.showMyInfoDetailActivity(getContext());
                 break;
+
             case R.id.ll_about:
                 UIHelper.showWebView(getContext(),AppConfig.MAIN_URL + "/index.php?g=portal&m=page&a=lists","");
                 break;

@@ -52,7 +52,9 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -86,6 +88,24 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
     @InjectView(R.id.ll_password)
     LinearLayout mPassWordLayout;
 
+    @InjectView(R.id.iv_live_share_weibo)
+    ImageView imShareWeibo;
+
+
+    @InjectView(R.id.iv_live_share_qqzone)
+    ImageView imShareQzone;
+    @InjectView(R.id.iv_live_share_qq)
+    ImageView imShareQQ;
+    @InjectView(R.id.iv_live_share_wechat)
+    ImageView imShareWechat;
+    @InjectView(R.id.iv_live_share_timeline)
+    ImageView imShareTimeLine;
+
+
+    List<ImageView> imgShare = new ArrayList();
+    List<Integer> imgsChooseShare = new ArrayList<>();
+    List<Integer> imgsCancelShare = new ArrayList<>();
+
     //分享模式 7为不分享任何平台
     private int shareType = 7;
 
@@ -107,6 +127,7 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
     private File protraitFile;
     private String protraitPath;
 
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_ready_start_live;
@@ -114,14 +135,33 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
 
     @Override
     public void initView() {
-        if (AppConfig.ROOM_PASSWORD_SWITCH==0){
+        imgsChooseShare.add(R.drawable.room_weibo_p);
+        imgsChooseShare.add(R.drawable.room_wechat_p);
+        imgsChooseShare.add(R.drawable.room_timeline_p);
+        imgsChooseShare.add(R.drawable.room_qq_p);
+        imgsChooseShare.add(R.drawable.room_qqzone_p);
+
+        imgsCancelShare.add(R.drawable.room_weibo);
+        imgsCancelShare.add(R.drawable.room_wechat);
+        imgsCancelShare.add(R.drawable.room_timeline);
+        imgsCancelShare.add(R.drawable.room_qq);
+        imgsCancelShare.add(R.drawable.room_qqzone);
+
+        imgShare.add(imShareWeibo);
+        imgShare.add(imShareWechat);
+        imgShare.add(imShareTimeLine);
+        imgShare.add(imShareQQ);
+        imgShare.add(imShareQzone);
+
+
+        if (AppConfig.ROOM_PASSWORD_SWITCH == 0) {
             mPassWordLayout.setVisibility(View.GONE);
-        }else {
+        } else {
             mPassWordLayout.setVisibility(View.VISIBLE);
         }
-        if (AppConfig.ROOM_CHARGE_SWITCH==0){
+        if (AppConfig.ROOM_CHARGE_SWITCH == 0) {
             mChargeLayout.setVisibility(View.GONE);
-        }else {
+        } else {
             mChargeLayout.setVisibility(View.VISIBLE);
         }
 
@@ -158,6 +198,7 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
         findViewById(R.id.iv_live_share_qqzone).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startLiveShare(v, 4);
                 shareType = 4 == shareType ? 7 : 4;
             }
@@ -301,8 +342,8 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
      * @dw 准备直播
      */
     private void readyStart() {
-        if (mUser.id == null||StringUtils.toInt(mUser.id)<=0) {
-            showToast3("请登录后开播",0);
+        if (mUser.id == null || StringUtils.toInt(mUser.id) <= 0) {
+            showToast3("请登录后开播", 0);
             return;
         }
         //请求服务端
@@ -511,9 +552,13 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
         if (type == shareType) {
             String titlesClose[] = getResources().getStringArray(R.array.live_start_share_close);
             titleStr = titlesClose[type];
+            imgShare.get(type).setImageResource(imgsCancelShare.get(type));
+
+
         } else {
             String titlesOpen[] = getResources().getStringArray(R.array.live_start_share_open);
             titleStr = titlesOpen[type];
+            imgShare.get(type).setImageResource(imgsChooseShare.get(type));
         }
 
         View popView = getLayoutInflater().inflate(R.layout.pop_view_share_start_live, null);

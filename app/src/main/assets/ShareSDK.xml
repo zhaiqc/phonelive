@@ -53,7 +53,7 @@
     -->
 
 	<ShareSDK
-		AppKey = "14d1fdc2e57d8"/> <!-- 修改成你在sharesdk后台注册的应用的appkey"-->
+		AppKey = "2065ac72624b8"/> <!-- 修改成你在sharesdk后台注册的应用的appkey"-->
 
 	<!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
 	<SinaWeibo
@@ -104,7 +104,7 @@
 	<WechatMoments
 		Id="5"
 		SortId="5"
-		AppId="wxff35f1442deb1bd1"
+		AppId="wx9da4dc60311ff681"
 		AppSecret="ce3966067c9b68ea43714239eff3f2d6"
 		BypassApproval="false"
 		Enable="true" />
@@ -120,8 +120,8 @@
 	<QQ
 		Id="7"
 		SortId="7"
-		AppId="100371282"
-		AppKey="aed9b0303e3ed1e27bae87c33761161d"
+		AppId="101404321"
+		AppKey="1dec16bb850de253db6e1ca20a9b14b0"
 		ShareByAppClient="true"
 		Enable="true" />
 

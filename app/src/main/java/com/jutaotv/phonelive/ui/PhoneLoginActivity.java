@@ -1,6 +1,8 @@
 package com.jutaotv.phonelive.ui;
 
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.jutaotv.phonelive.AppContext;
 import com.jutaotv.phonelive.api.remote.ApiUtils;
@@ -47,15 +49,15 @@ public class PhoneLoginActivity extends ToolBarBaseActivity implements PlatformA
     @InjectView(R.id.et_password)
     BlackEditText mEtUserPassword;
 
-//    //QQ登录
-//    @InjectView(R.id.iv_other_login_qq)
-//    ImageView mIvQQLogin;
-//
-//    @InjectView(R.id.iv_other_login_wechat)
-//    ImageView mIvWechatLogin;
-//
-//    @InjectView(R.id.ll_other_login)
-//    LinearLayout mLlOtherLogin;
+    //QQ登录
+    @InjectView(R.id.iv_other_login_qq)
+    ImageView mIvQQLogin;
+
+    @InjectView(R.id.iv_other_login_wechat)
+    ImageView mIvWechatLogin;
+
+    @InjectView(R.id.ll_other_login)
+    LinearLayout mLlOtherLogin;
 
     private String type;
     private String[] names = {QQ.NAME,Wechat.NAME, SinaWeibo.NAME};
@@ -68,25 +70,25 @@ public class PhoneLoginActivity extends ToolBarBaseActivity implements PlatformA
     @Override
     public void initView() {
 
-//        //微信登录
-//        mIvWechatLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showWaitDialog("正在登录...",false);
-//                type = "wx";
-//                otherLogin(names[1]);
-//            }
-//        });
-//        //QQ登录
-//        mIvQQLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showWaitDialog("正在登录...",false);
-//                type = "qq";
-//                otherLogin(names[0]);
-//
-//            }
-//        });
+        //微信登录
+        mIvWechatLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showWaitDialog("正在登录...",false);
+                type = "wx";
+                otherLogin(names[1]);
+            }
+        });
+        //QQ登录
+        mIvQQLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showWaitDialog("正在登录...",false);
+                type = "qq";
+                otherLogin(names[0]);
+
+            }
+        });
 
         mActivityTitle.setMoreListener(new View.OnClickListener() {
             @Override
@@ -164,13 +166,13 @@ public class PhoneLoginActivity extends ToolBarBaseActivity implements PlatformA
     private void otherLogin(String name){
 
         ShareSDK.initSDK(this);
-
         showWaitDialog("正在授权登录...",false);
         Platform other = ShareSDK.getPlatform(name);
         other.showUser(null);//执行登录，登录后在回调里面获取用户资料
         other.SSOSetting(false);  //设置false表示使用SSO授权方式
         other.setPlatformActionListener(this);
         other.removeAccount(true);
+
     }
 
 

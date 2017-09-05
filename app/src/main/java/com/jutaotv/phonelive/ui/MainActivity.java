@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,7 +32,9 @@ import com.hyphenate.chat.EMClient;
 import com.jutaotv.phonelive.AppConfig;
 import com.jutaotv.phonelive.AppContext;
 import com.jutaotv.phonelive.AppManager;
+import com.jutaotv.phonelive.R;
 import com.jutaotv.phonelive.api.remote.ApiUtils;
+import com.jutaotv.phonelive.api.remote.PhoneLiveApi;
 import com.jutaotv.phonelive.base.ToolBarBaseActivity;
 import com.jutaotv.phonelive.bean.BonusBean;
 import com.jutaotv.phonelive.em.MainTab;
@@ -49,8 +50,6 @@ import com.jutaotv.phonelive.utils.UIHelper;
 import com.jutaotv.phonelive.utils.UpdateManager;
 import com.jutaotv.phonelive.widget.BlackTextView;
 import com.jutaotv.phonelive.widget.MyFragmentTabHost;
-import com.jutaotv.phonelive.R;
-import com.jutaotv.phonelive.api.remote.PhoneLiveApi;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
@@ -111,12 +110,10 @@ public class MainActivity extends ToolBarBaseActivity implements TabHost.OnTabCh
             MainTab mainTab = tabs[i];
 
             TabHost.TabSpec tab = mTabHost.newTabSpec(String.valueOf(mainTab.getResName()));
-            View indicator = LayoutInflater.from(getApplicationContext())
-                    .inflate(R.layout.tab_indicator, null);
+            View indicator = LayoutInflater.from(getApplicationContext()).inflate(R.layout.tab_indicator, null);
             ImageView tabImg = (ImageView) indicator.findViewById(R.id.tab_img);
             BlackTextView tabTv = (BlackTextView) indicator.findViewById(R.id.tv_wenzi);
-            Drawable drawable = this.getResources().getDrawable(
-                    mainTab.getResIcon());
+            Drawable drawable = this.getResources().getDrawable(mainTab.getResIcon());
             tabTv.setText(title[i]);
             if (i == 2) {
                 cart = tabImg;
@@ -163,7 +160,6 @@ public class MainActivity extends ToolBarBaseActivity implements TabHost.OnTabCh
         checkNewVersion();
         updateConfig();
 //        Log.d("initData:",getPackageName());
-
 
 
         mTabHost.setCurrentTab(0);
