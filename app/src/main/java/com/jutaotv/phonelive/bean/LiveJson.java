@@ -3,6 +3,8 @@ package com.jutaotv.phonelive.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by weipeng on 2017/1/17.
  */
@@ -21,16 +23,27 @@ public class LiveJson implements Parcelable {
      * nums : 0
      */
 
+    @SerializedName("uid")
     public String uid;
+    @SerializedName("avatar")
     public String avatar;
+    @SerializedName("avatar_thumb")
     public String avatar_thumb;
+    @SerializedName("user_nicename")
     public String user_nicename;
+    @SerializedName("title")
     public String title;
+    @SerializedName("city")
     public String city;
+    @SerializedName("stream")
     public String stream;
+    @SerializedName("nums")
     public String nums;
+    @SerializedName("distance")
     public String distance;
+    @SerializedName("pull")
     public String pull;
+    @SerializedName("thumb")
     public String thumb;
 
 

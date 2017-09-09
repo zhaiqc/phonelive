@@ -1,5 +1,7 @@
 package com.jutaotv.phonelive.api.remote;
 
+import android.util.Log;
+
 import com.jutaotv.phonelive.AppConfig;
 import com.jutaotv.phonelive.AppContext;
 import com.jutaotv.phonelive.bean.GiftBean;

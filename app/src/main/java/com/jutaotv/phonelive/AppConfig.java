@@ -15,7 +15,7 @@ import java.util.Properties;
  */
 public class AppConfig {
     //域名
-    public static final String MAIN_URL ="http://23.91.97.155";
+        public static final String MAIN_URL ="http://www.zbbc.com";
     //api地址
     public static final String MAIN_URL_API = MAIN_URL + "/api/public/";
     //支付宝回调地址

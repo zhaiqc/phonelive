@@ -167,8 +167,14 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
 
 
         findViewById(R.id.iv_live_share_weibo).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+//                imShareWeibo.setImageResource(R.drawable.room_weibo_p);
+                imShareTimeLine.setImageResource(R.drawable.room_timeline);
+                imShareQzone.setImageResource(R.drawable.room_qqzone);
+                imShareQQ.setImageResource(R.drawable.room_qq);
+                imShareWechat.setImageResource(R.drawable.room_wechat);
                 startLiveShare(v, 0);
                 shareType = 0 == shareType ? 7 : 0;
             }
@@ -176,6 +182,11 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
         findViewById(R.id.iv_live_share_timeline).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imShareWeibo.setImageResource(R.drawable.room_weibo);
+//                imShareTimeLine.setImageResource(R.drawable.room_timeline_p);
+                imShareQzone.setImageResource(R.drawable.room_qqzone);
+                imShareQQ.setImageResource(R.drawable.room_qq);
+                imShareWechat.setImageResource(R.drawable.room_wechat);
                 startLiveShare(v, 2);
                 shareType = 2 == shareType ? 7 : 2;
             }
@@ -183,6 +194,11 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
         findViewById(R.id.iv_live_share_wechat).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imShareWeibo.setImageResource(R.drawable.room_weibo);
+                imShareTimeLine.setImageResource(R.drawable.room_timeline);
+                imShareQzone.setImageResource(R.drawable.room_qqzone);
+                imShareQQ.setImageResource(R.drawable.room_qq);
+//                imShareWechat.setImageResource(R.drawable.room_wechat_p);
                 startLiveShare(v, 1);
                 shareType = 1 == shareType ? 7 : 1;
             }
@@ -191,6 +207,11 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
         findViewById(R.id.iv_live_share_qq).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imShareWeibo.setImageResource(R.drawable.room_weibo);
+                imShareTimeLine.setImageResource(R.drawable.room_timeline);
+                imShareQzone.setImageResource(R.drawable.room_qqzone);
+//                imShareQQ.setImageResource(R.drawable.room_qq_p);
+                imShareWechat.setImageResource(R.drawable.room_wechat);
                 startLiveShare(v, 3);
                 shareType = 3 == shareType ? 7 : 3;
             }
@@ -198,7 +219,11 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
         findViewById(R.id.iv_live_share_qqzone).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                imShareWeibo.setImageResource(R.drawable.room_weibo);
+                imShareTimeLine.setImageResource(R.drawable.room_timeline);
+//                imShareQzone.setImageResource(R.drawable.room_qqzone_p);
+                imShareQQ.setImageResource(R.drawable.room_qq);
+                imShareWechat.setImageResource(R.drawable.room_wechat);
                 startLiveShare(v, 4);
                 shareType = 4 == shareType ? 7 : 4;
             }
@@ -548,6 +573,7 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
      * @dw 开始直播分享
      */
     private void startLiveShare(View v, int type) {
+
         String titleStr = "";
         if (type == shareType) {
             String titlesClose[] = getResources().getStringArray(R.array.live_start_share_close);
@@ -559,6 +585,7 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
             String titlesOpen[] = getResources().getStringArray(R.array.live_start_share_open);
             titleStr = titlesOpen[type];
             imgShare.get(type).setImageResource(imgsChooseShare.get(type));
+
         }
 
         View popView = getLayoutInflater().inflate(R.layout.pop_view_share_start_live, null);

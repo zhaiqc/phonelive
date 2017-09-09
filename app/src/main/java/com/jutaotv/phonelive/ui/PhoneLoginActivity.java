@@ -1,8 +1,11 @@
 package com.jutaotv.phonelive.ui;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.jutaotv.phonelive.AppContext;
 import com.jutaotv.phonelive.api.remote.ApiUtils;
@@ -62,6 +65,7 @@ public class PhoneLoginActivity extends ToolBarBaseActivity implements PlatformA
     private String type;
     private String[] names = {QQ.NAME,Wechat.NAME, SinaWeibo.NAME};
 
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_login;
@@ -77,6 +81,8 @@ public class PhoneLoginActivity extends ToolBarBaseActivity implements PlatformA
                 showWaitDialog("正在登录...",false);
                 type = "wx";
                 otherLogin(names[1]);
+
+
             }
         });
         //QQ登录
@@ -164,14 +170,15 @@ public class PhoneLoginActivity extends ToolBarBaseActivity implements PlatformA
     }
 
     private void otherLogin(String name){
-
         ShareSDK.initSDK(this);
         showWaitDialog("正在授权登录...",false);
         Platform other = ShareSDK.getPlatform(name);
         other.showUser(null);//执行登录，登录后在回调里面获取用户资料
         other.SSOSetting(false);  //设置false表示使用SSO授权方式
+//        other.authorize(); //获取登录用户的信息，如果没有授权，会先授权，然后获取用户信息
         other.setPlatformActionListener(this);
         other.removeAccount(true);
+
 
     }
 
@@ -186,17 +193,16 @@ public class PhoneLoginActivity extends ToolBarBaseActivity implements PlatformA
 
         @Override
         public void onResponse(String s,int id) {
-
-           hideWaitDialog();
+            hideWaitDialog();
            JSONArray requestRes = ApiUtils.checkIsSuccess(s);
-           if(requestRes != null){
+
+            if(requestRes != null){
 
                Gson gson = new Gson();
                try {
                    UserBean user = gson.fromJson(requestRes.getString(0), UserBean.class);
-
+//                   Log.d("onResponse: ", String.valueOf(user.user_nicename));
                    AppContext.getInstance().saveUserInfo(user);
-
                    LoginUtils.getInstance().OtherInit(PhoneLoginActivity.this);
                } catch (JSONException e) {
                    e.printStackTrace();
@@ -242,7 +248,8 @@ public class PhoneLoginActivity extends ToolBarBaseActivity implements PlatformA
     }
 
     @Override
-    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+    public void onComplete(Platform platform, final int i, HashMap<String, Object> hashMap) {
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -252,6 +259,7 @@ public class PhoneLoginActivity extends ToolBarBaseActivity implements PlatformA
         });
 
         //用户资源都保存到res
+
         //通过打印res数据看看有哪些数据是你想要的
         if (i == Platform.ACTION_USER_INFOR) {
             //showWaitDialog("正在登录...");

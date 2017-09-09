@@ -3,6 +3,7 @@ package com.jutaotv.phonelive.ui;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -168,7 +169,7 @@ public class LiveLoginSelectActivity extends ToolBarBaseActivity implements Plat
 
                 @Override
                 public void onResponse(String response,int id) {
-
+                    Log.d("onResponse: ",response );
                     JSONArray requestRes = ApiUtils.checkIsSuccess(response);
                     if(requestRes != null){
                         Gson gson = new Gson();

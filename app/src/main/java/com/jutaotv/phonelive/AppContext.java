@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.widget.Toast;
 
+import com.google.gson.annotations.SerializedName;
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMError;
 import com.hyphenate.EMMessageListener;
@@ -270,6 +271,7 @@ public class AppContext extends BaseApplication {
      */
     @SuppressWarnings("serial")
     public void saveUserInfo(final UserBean user) {
+
         this.loginUid = user.id;
         this.Token = user.token;
         this.login = true;

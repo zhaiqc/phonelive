@@ -31,6 +31,7 @@
                     android:layout_width="@dimen/space_35"
                     android:layout_height="@dimen/space_35"
                     android:background="@drawable/icon_game"/>
+
                 <ImageView
                     android:id="@+id/iv_live_rtc"
                     android:layout_marginLeft="5dp"
@@ -43,7 +44,12 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:background="@drawable/btn_show_live_meiyan"/>
-
+                <ImageView
+                    android:id="@+id/iv_live_shar"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/btn_show_live_shar"/>
                 <RelativeLayout
                     android:layout_marginLeft="5dp"
                     android:layout_width="40dp"

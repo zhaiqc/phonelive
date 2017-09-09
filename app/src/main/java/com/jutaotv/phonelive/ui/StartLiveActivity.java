@@ -535,21 +535,24 @@ public class StartLiveActivity extends ShowLiveActivityBase implements SearchMus
         //连接到socket服务端
         mChatServer.connectSocketServer(mUser, mStreamName, mUser.id);
     }
-
-    @OnClick({R.id.iv_game_open,R.id.iv_live_rtc, R.id.btn_live_sound, R.id.iv_live_emcee_head, R.id.tglbtn_danmu_setting, R.id.ll_live_room_info, R.id.btn_live_end_music, R.id.iv_live_music, R.id.iv_live_meiyan, R.id.iv_live_camera_control, R.id.camera_preview, R.id.iv_live_privatechat, R.id.iv_live_back, R.id.ll_yp_labe, R.id.iv_live_chat, R.id.bt_send_chat})
+//R.id.iv_game_open,
+    @OnClick({R.id.iv_live_rtc, R.id.btn_live_sound, R.id.iv_live_emcee_head, R.id.tglbtn_danmu_setting, R.id.ll_live_room_info, R.id.btn_live_end_music, R.id.iv_live_music, R.id.iv_live_meiyan, R.id.iv_live_camera_control, R.id.camera_preview, R.id.iv_live_privatechat, R.id.iv_live_back, R.id.ll_yp_labe, R.id.iv_live_chat, R.id.bt_send_chat,R.id.iv_live_shar})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            //打开游戏
-            case R.id.iv_game_open:
-                if (mJinHuaPokersLayout.getVisibility() != View.VISIBLE && mConnectionState) {
-                    mChatServer.doSendOpenGame(mUser);
-
-                } else {
-                    mPokersGameControl.closeGame(mChatServer, mUser, mStreamName,1);
-                }
-
+            case R.id.iv_live_shar:
+                ShareUtils.showSharePopWindow(this, v);
                 break;
+//            //打开游戏
+//            case R.id.iv_game_open:
+//                if (mJinHuaPokersLayout.getVisibility() != View.VISIBLE && mConnectionState) {
+//                    mChatServer.doSendOpenGame(mUser);
+//
+//                } else {
+//                    mPokersGameControl.closeGame(mChatServer, mUser, mStreamName,1);
+//                }
+//
+//                break;
             //音效
             case R.id.btn_live_sound:
                 showSoundEffectsDialog();

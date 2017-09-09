@@ -3,6 +3,7 @@ package com.jutaotv.phonelive.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,49 +37,53 @@ import okhttp3.Call;
 public class ShareUtils {
 
 
-    public static void share(Activity context,int id,SimpleUserInfo user){
-        switch (id){
+    public static void share(Activity context, int id, SimpleUserInfo user) {
+        switch (id) {
             case R.id.ll_live_shar_qq:
-                share(context,3,user,null);
+                share(context, 3, user, null);
+
                 break;
             case R.id.ll_live_shar_pyq:
-                share(context,2,user,null);
+                share(context, 2, user, null);
                 break;
             case R.id.ll_live_shar_qqzone:
-                share(context,4,user,null);
+                share(context, 4, user, null);
                 break;
             case R.id.ll_live_shar_sinna:
-                share(context,0,user,null);
+                share(context, 0, user, null);
                 break;
             case R.id.ll_live_shar_wechat:
-                share(context,1,user,null);
+                share(context, 1, user, null);
                 break;
         }
     }
-    public static void share(final Context context, final int index, final SimpleUserInfo user, final PlatformActionListener listener){
+
+    public static void share(final Context context, final int index, final SimpleUserInfo user, final PlatformActionListener listener) {
         PhoneLiveApi.getConfig(new StringCallback() {
             @Override
-            public void onError(Call call, Exception e,int id) {
-                Toast.makeText(context,"获取分享地址失败",Toast.LENGTH_SHORT).show();
+            public void onError(Call call, Exception e, int id) {
+                Toast.makeText(context, "获取分享地址失败", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onResponse(String response,int id) {
+            public void onResponse(String response, int id) {
                 JSONArray res = ApiUtils.checkIsSuccess(response);
-                if(res != null){
+
+                if (res != null) {
+
                     try {
                         JSONObject jsonObject = res.getJSONObject(0);
-                        String     shareUrl = jsonObject.getString("app_android");
+//                         = jsonObject.getString("app_android");
+//                        Log.d("shareUrl:", shareUrl);
 
 
-                        if(index == 1 || index == 2){
-                            shareUrl = jsonObject.getString("wx_siteurl") + user.id;
-                        }
+//                        if(index == 1 || index == 2){
+                        String shareUrl = jsonObject.getString("wx_siteurl") + user.id;
+//                        }
+                        String[] names = new String[]{SinaWeibo.NAME, Wechat.NAME, WechatMoments.NAME, QQ.NAME, QZone.NAME};
 
-                        String[] names = new  String[]{SinaWeibo.NAME,Wechat.NAME,WechatMoments.NAME,QQ.NAME,QZone.NAME};
-
-                        share(context,names[index],jsonObject.getString("share_title")
-                                ,user.user_nicename + jsonObject.getString("share_des"),user,shareUrl,listener);
+                        share(context, names[index], jsonObject.getString("share_title")
+                                , user.user_nicename + jsonObject.getString("share_des"), user, shareUrl, listener);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -91,7 +96,8 @@ public class ShareUtils {
         });
 
     }
-    public static void share(final Context context, String name, String des,String title, final SimpleUserInfo user,String shareUrl, PlatformActionListener listener) {
+
+    public static void share(final Context context, String name, String des, String title, final SimpleUserInfo user, String shareUrl, PlatformActionListener listener) {
         ShareSDK.initSDK(context);
         final OnekeyShare oks = new OnekeyShare();
         oks.setSilent(true);
@@ -133,17 +139,18 @@ public class ShareUtils {
         // 启动分享GUI
         oks.show(context);
     }
-    //分享pop弹窗
-    public static void showSharePopWindow(Context context,View v) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.pop_view_share,null);
-        PopupWindow p = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,true);
+    //分享pop弹窗
+    public static void showSharePopWindow(Context context, View v) {
+
+        View view = LayoutInflater.from(context).inflate(R.layout.pop_view_share, null);
+        PopupWindow p = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         p.setBackgroundDrawable(new BitmapDrawable());
         p.setOutsideTouchable(true);
         int[] location = new int[2];
         v.getLocationOnScreen(location);
         //p.showAtLocation(v, Gravity.NO_GRAVITY,location[0] + v.getWidth()/2 - view.getMeasuredWidth()/2,location[1]- view.getMeasuredHeight());
-        p.showAtLocation(v, Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+        p.showAtLocation(v, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 }
