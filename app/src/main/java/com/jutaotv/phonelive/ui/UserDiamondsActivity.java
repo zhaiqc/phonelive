@@ -1,25 +1,24 @@
 package com.jutaotv.phonelive.ui;
 
-import android.content.DialogInterface;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.jutaotv.phonelive.AppConfig;
+import com.jutaotv.phonelive.R;
 import com.jutaotv.phonelive.WxPay.WChatPay;
+import com.jutaotv.phonelive.adapter.RechangeAdapter;
+import com.jutaotv.phonelive.alipay.AliPay;
+import com.jutaotv.phonelive.alipay.Keys;
 import com.jutaotv.phonelive.api.remote.ApiUtils;
+import com.jutaotv.phonelive.api.remote.PhoneLiveApi;
+import com.jutaotv.phonelive.base.ToolBarBaseActivity;
 import com.jutaotv.phonelive.bean.RechargeBean;
 import com.jutaotv.phonelive.bean.RechargeJson;
 import com.jutaotv.phonelive.ui.customviews.ActivityTitle;
-import com.jutaotv.phonelive.R;
-import com.jutaotv.phonelive.adapter.RechangeAdapter;
-import com.jutaotv.phonelive.alipay.Keys;
-import com.jutaotv.phonelive.utils.DialogHelp;
 import com.jutaotv.phonelive.utils.StringUtils;
-import com.jutaotv.phonelive.alipay.AliPay;
-import com.jutaotv.phonelive.api.remote.PhoneLiveApi;
-import com.jutaotv.phonelive.base.ToolBarBaseActivity;
+import com.jutaotv.phonelive.utils.UIHelper;
 import com.jutaotv.phonelive.widget.BlackTextView;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -45,8 +44,8 @@ public class UserDiamondsActivity extends ToolBarBaseActivity {
 
     private List<RechargeBean> mRechargeList = new ArrayList<>();
 
-    private final int WX_PAY    = 1;
-    private final int ALI_PAY   = 2;
+    private final int WX_PAY = 1;
+    private final int ALI_PAY = 2;
 
     private int PAY_MODE = WX_PAY;
 
@@ -68,9 +67,9 @@ public class UserDiamondsActivity extends ToolBarBaseActivity {
     @Override
     public void initView() {
 
-        mActivityTitle.setTitle("我的"+ AppConfig.CURRENCY_NAME);
-        mHeadView = getLayoutInflater().inflate(R.layout.view_diamonds_head,null);
-        mCoin     = (BlackTextView) mHeadView.findViewById(R.id.tv_coin);
+        mActivityTitle.setTitle("我的" + AppConfig.CURRENCY_NAME);
+        mHeadView = getLayoutInflater().inflate(R.layout.view_diamonds_head, null);
+        mCoin = (BlackTextView) mHeadView.findViewById(R.id.tv_coin);
 
         mSelectNumListItem.addHeaderView(mHeadView);
 
@@ -78,16 +77,20 @@ public class UserDiamondsActivity extends ToolBarBaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                DialogHelp.getSelectDialog(UserDiamondsActivity.this, new String[]{"支付宝", "微信"}, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
 
-                        PAY_MODE = i == 0 ? ALI_PAY : WX_PAY;
+                UIHelper.showWebPay(getBaseContext(), String.valueOf(position));
 
-                        actionPay(String.valueOf(mRechargeList.get(position - 1).money), mRechargeList.get(position - 1).coin
-                                ,mRechargeList.get(position - 1).id);
-                    }
-                }).create().show();
+
+//                DialogHelp.getSelectDialog(UserDiamondsActivity.this, new String[]{"支付宝", "微信"}, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                        PAY_MODE = i == 0 ? ALI_PAY : WX_PAY;
+//
+//                        actionPay(String.valueOf(mRechargeList.get(position - 1).money), mRechargeList.get(position - 1).coin
+//                                ,mRechargeList.get(position - 1).id);
+//                    }
+//                }).create().show();
 
 
             }
@@ -110,40 +113,40 @@ public class UserDiamondsActivity extends ToolBarBaseActivity {
         requestData();
 
         mAliPayUtils = new AliPay(this);
-        mWChatPay    = new WChatPay(this);
+        mWChatPay = new WChatPay(this);
 
 
     }
 
-    private void actionPay(String money, String num,String changeid) {
+    private void actionPay(String money, String num, String changeid) {
 
         if (PAY_MODE == ALI_PAY && checkPayMode()) {
 
-            mAliPayUtils.initPay(money, num,changeid);
+            mAliPayUtils.initPay(money, num, changeid);
 
-        }else if(checkPayMode()){
+        } else if (checkPayMode()) {
 
-            mWChatPay.initPay(money, num,changeid);
+            mWChatPay.initPay(money, num, changeid);
         }
     }
 
     //检查支付配置
-    private boolean checkPayMode(){
+    private boolean checkPayMode() {
 
-        if(PAY_MODE == ALI_PAY){
-            if(mRechargeJson.aliapp_switch.equals("1")){
+        if (PAY_MODE == ALI_PAY) {
+            if (mRechargeJson.aliapp_switch.equals("1")) {
                 return true;
-            }else{
+            } else {
 
-                showToast3("支付宝未开启",0);
+                showToast3("支付宝未开启", 0);
                 return false;
             }
-        }else if(PAY_MODE == WX_PAY){
-            if(mRechargeJson.wx_switch.equals("1")){
+        } else if (PAY_MODE == WX_PAY) {
+            if (mRechargeJson.wx_switch.equals("1")) {
                 return true;
-            }else{
+            } else {
 
-                showToast3("微信未开启",0);
+                showToast3("微信未开启", 0);
                 return false;
             }
         }
@@ -154,7 +157,7 @@ public class UserDiamondsActivity extends ToolBarBaseActivity {
 
     private void requestData() {
 
-        PhoneLiveApi.requestBalance(getUserID(),getUserToken(),new StringCallback(){
+        PhoneLiveApi.requestBalance(getUserID(), getUserToken(), new StringCallback() {
 
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -165,10 +168,10 @@ public class UserDiamondsActivity extends ToolBarBaseActivity {
             public void onResponse(String response, int id) {
                 JSONArray array = ApiUtils.checkIsSuccess(response);
 
-                if(array != null){
+                if (array != null) {
 
                     try {
-                        mRechargeJson = new Gson().fromJson(array.getString(0),RechargeJson.class);
+                        mRechargeJson = new Gson().fromJson(array.getString(0), RechargeJson.class);
                         mRechargeList.clear();
                         mRechargeList.addAll(mRechargeJson.rules);
                         mRechangeAdapter.notifyDataSetChanged();
@@ -178,9 +181,9 @@ public class UserDiamondsActivity extends ToolBarBaseActivity {
                         AppConfig.GLOBAL_WX_KEY = mRechargeJson.wx_appid;
 
                         //支付宝
-                        Keys.DEFAULT_PARTNER    = mRechargeJson.aliapp_partner;
-                        Keys.DEFAULT_SELLER     = mRechargeJson.aliapp_seller_id;
-                        Keys.PRIVATE            = mRechargeJson.aliapp_key_android;
+                        Keys.DEFAULT_PARTNER = mRechargeJson.aliapp_partner;
+                        Keys.DEFAULT_SELLER = mRechargeJson.aliapp_seller_id;
+                        Keys.PRIVATE = mRechargeJson.aliapp_key_android;
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -204,13 +207,11 @@ public class UserDiamondsActivity extends ToolBarBaseActivity {
 
     //充值结果
     public void rechargeResult(boolean isOk, String rechargeMoney) {
-        if(isOk){
+        if (isOk) {
             mCoin.setText(String.valueOf(StringUtils.toInt(mCoin.getText().toString()) +
                     StringUtils.toInt(rechargeMoney)));
         }
     }
-
-
 
 
 }

@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
-        android:background="@drawable/create_room_bg"
+        android:background="@drawable/bg1"
         android:id="@+id/rl_livestop"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

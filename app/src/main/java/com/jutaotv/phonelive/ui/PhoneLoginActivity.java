@@ -221,12 +221,12 @@ public class PhoneLoginActivity extends ToolBarBaseActivity implements PlatformA
         }
 
         if (mEtUserPhone.length() == 0) {
-            mEtUserPhone.setError("请输入手机号码");
+            mEtUserPhone.setError("请输入邮箱");
             mEtUserPhone.requestFocus();
             return true;
         }
-        if (mEtUserPhone.length() != 11) {
-            mEtUserPhone.setError("请输入11位的手机号码");
+        if (mEtUserPhone.length()<5||!mEtUserPhone.getText().toString().contains("@")) {
+            mEtUserPhone.setError("请输入正确的邮箱地址");
             mEtUserPhone.requestFocus();
             return true;
         }

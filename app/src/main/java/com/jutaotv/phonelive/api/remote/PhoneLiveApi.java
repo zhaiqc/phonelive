@@ -47,7 +47,7 @@ public class PhoneLiveApi {
     }
 
     //HHH 2016-09-09
-    public static void reg(String user_login, String user_pass, String user_pass2, String code, StringCallback callback) {
+    public static void reg(String user_login, String user_pass, String user_pass2,  StringCallback callback) {
         String url = AppConfig.MAIN_URL_API;
         try {
             OkHttpUtils.get()
@@ -56,7 +56,7 @@ public class PhoneLiveApi {
                     .addParams("user_login", user_login)
                     .addParams("user_pass", URLEncoder.encode(user_pass, "UTF-8"))
                     .addParams("user_pass2", URLEncoder.encode(user_pass2, "UTF-8"))
-                    .addParams("code", code)
+//                    .addParams("code", code)
                     .build()
                     .execute(callback);
         } catch (UnsupportedEncodingException e) {
@@ -65,7 +65,7 @@ public class PhoneLiveApi {
 
     }
 
-    public static void findPass(String user_login, String user_pass, String user_pass2, String code, StringCallback callback) {
+    public static void findPass(String user_login, String user_pass, String user_pass2,  StringCallback callback) {
         String url = AppConfig.MAIN_URL_API;
         try {
             OkHttpUtils.get()
@@ -74,7 +74,7 @@ public class PhoneLiveApi {
                     .addParams("user_login", user_login)
                     .addParams("user_pass", URLEncoder.encode(user_pass, "UTF-8"))
                     .addParams("user_pass2", URLEncoder.encode(user_pass2, "UTF-8"))
-                    .addParams("code", code)
+//                    .addParams("code", code)
                     .tag("findPass")
                     .build()
                     .execute(callback);

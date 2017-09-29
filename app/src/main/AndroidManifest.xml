@@ -70,7 +70,7 @@
     <application
         android:name="com.jutaotv.phonelive.AppContext"
         android:allowBackup="true"
-        android:icon="@mipmap/ml_icon"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
@@ -190,6 +190,13 @@
             android:label="主页"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.WebPayActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="网页支付"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
             android:name="com.jutaotv.phonelive.ui.FansActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="粉丝列表"
@@ -271,9 +278,9 @@
 
         <activity
             android:name="com.jutaotv.phonelive.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:launchMode="singleTop"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
 
         <!-- jupsh -->

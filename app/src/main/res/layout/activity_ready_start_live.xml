@@ -6,139 +6,146 @@
     <!--创建直播遮罩层-->
 
     <RelativeLayout
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
         android:id="@+id/rl_start_live_bg"
-        android:background="@drawable/create_room_bg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg1"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp">
 
         <LinearLayout
-            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
             <LinearLayout
-                android:visibility="gone"
                 android:id="@+id/ll_password"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
                 <CheckBox
-                    style="@style/CustomCheckboxTheme"
                     android:id="@+id/cb_set_pass"
+                    style="@style/CustomCheckboxTheme"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
+
                 <TextView
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@color/white"
-                    android:text="@string/pass_room"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/pass_room"
+                    android:textColor="@color/white" />
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
                 android:id="@+id/ll_charge"
-                android:layout_marginLeft="30dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:visibility="gone">
+
                 <CheckBox
-                    style="@style/CustomCheckboxTheme"
                     android:id="@+id/cb_set_charge"
+                    style="@style/CustomCheckboxTheme"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
+
                 <TextView
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@color/white"
-                    android:text="@string/open_charge_mode"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/open_charge_mode"
+                    android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>
 
 
-
         <ImageView
-            android:layout_marginRight="10dp"
             android:id="@+id/iv_live_exit"
-            android:layout_alignParentRight="true"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/room_btn_x_h"/>
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/room_btn_x_h" />
 
 
         <ImageView
-            android:layout_marginTop="100dp"
-            android:layout_centerHorizontal="true"
             android:id="@+id/iv_live_select_pic"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/bg_select_pic"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/bg_select_pic" />
 
         <LinearLayout
-            android:layout_marginTop="240dp"
-            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="240dp"
             android:orientation="vertical">
 
 
-           <com.jutaotv.phonelive.widget.BlackEditText
-               android:textSize="@dimen/text_size_25"
+            <com.jutaotv.phonelive.widget.BlackEditText
                 android:id="@+id/et_start_live_title"
-                android:gravity="center"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:background="@null"
-                android:hint="@string/create_edit_text_hint"
-                android:layout_gravity="center"
                 android:layout_width="200dp"
-                android:layout_height="wrap_content" />
-
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:gravity="center"
+                android:hint="@string/create_edit_text_hint"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/text_size_25" />
 
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
+
                 <ImageView
-                    android:visibility="gone"
                     android:id="@+id/iv_live_share_weibo"
-                    android:src="@drawable/room_weibo"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/room_weibo"
+                    android:visibility="gone" />
+
                 <ImageView
                     android:id="@+id/iv_live_share_timeline"
-                    android:src="@drawable/room_timeline"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/room_timeline" />
+
                 <ImageView
                     android:id="@+id/iv_live_share_wechat"
-                    android:src="@drawable/room_wechat"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/room_wechat" />
+
                 <ImageView
                     android:id="@+id/iv_live_share_qq"
-                    android:src="@drawable/room_qq"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/room_qq" />
+
                 <ImageView
                     android:id="@+id/iv_live_share_qqzone"
-                    android:src="@drawable/room_qqzone"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/room_qqzone" />
             </LinearLayout>
 
             <com.jutaotv.phonelive.widget.BlackButton
                 android:id="@+id/btn_start_live"
-                android:textColor="@color/white"
-                android:background="@drawable/bg_start_live"
-                android:layout_marginTop="10dp"
                 android:layout_width="300dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_start_live"
+                android:textColor="@color/white" />
 
-            
 
         </LinearLayout>
 

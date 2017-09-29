@@ -34,10 +34,10 @@ import okhttp3.Call;
 public class PhoneRegActivity extends ToolBarBaseActivity {
     @InjectView(R.id.et_loginphone)
     BlackEditText mEtUserPhone;
-    @InjectView(R.id.et_logincode)
-    BlackEditText mEtCode;
-    @InjectView(R.id.btn_phone_login_send_code)
-    TextView mBtnSendCode;
+//    @InjectView(R.id.et_logincode)
+//    BlackEditText mEtCode;
+//    @InjectView(R.id.btn_phone_login_send_code)
+//    TextView mBtnSendCode;
 
     @InjectView(R.id.et_password)
     BlackEditText mEtUserPassword;
@@ -59,12 +59,12 @@ public class PhoneRegActivity extends ToolBarBaseActivity {
 
     @Override
     public void initView() {
-        mBtnSendCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendCode();
-            }
-        });
+//        mBtnSendCode.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sendCode();
+//            }
+//        });
 
         mActivityTitle.setReturnListener(new View.OnClickListener() {
             @Override
@@ -100,7 +100,7 @@ public class PhoneRegActivity extends ToolBarBaseActivity {
                     }
                 }
             });
-            SimpleUtils.startTimer(new WeakReference<TextView>(mBtnSendCode),"发送验证码",60,1);
+//            SimpleUtils.startTimer(new WeakReference<TextView>(mBtnSendCode),"发送验证码",60,1);
         }
         else{
             showToast3(getString(R.string.plase_check_you_num_is_correct),0);
@@ -124,11 +124,11 @@ public class PhoneRegActivity extends ToolBarBaseActivity {
                 return;
             }
             mUserName = mEtUserPhone.getText().toString();
-            String mCode = mEtCode.getText().toString();
+//            String mCode = mEtCode.getText().toString();
             String mPassword=  mEtUserPassword.getText().toString();
             String mSecondPassword= mEtSecondPassword.getText().toString();
             showWaitDialog(R.string.loading);
-            PhoneLiveApi.reg(mUserName, mPassword,mSecondPassword, mCode, callback);
+            PhoneLiveApi.reg(mUserName, mPassword,mSecondPassword, callback);
         }
 
 
@@ -171,16 +171,21 @@ public class PhoneRegActivity extends ToolBarBaseActivity {
             return true;
         }
         if (mEtUserPhone.length() == 0) {
-            mEtUserPhone.setError("请输入手机号码/用户名");
+            mEtUserPhone.setError("请输入邮箱/用户名");
             mEtUserPhone.requestFocus();
             return true;
         }
-
-        if (mEtCode.length() == 0) {
-            mEtCode.setError("请输入验证码");
-            mEtCode.requestFocus();
+        if (mEtUserPhone.length()<5||!mEtUserPhone.getText().toString().contains("@")){
+            mEtUserPhone.setError("请输入正确的邮箱");
+            mEtUserPhone.requestFocus();
             return true;
         }
+//
+//        if (mEtCode.length() == 0) {
+//            mEtCode.setError("请输入验证码");
+//            mEtCode.requestFocus();
+//            return true;
+//        }
 
         if (mEtUserPassword.length() == 0) {
             mEtUserPassword.setError("请输入密码");

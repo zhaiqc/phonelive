@@ -199,9 +199,7 @@ public class UserInformationFragment extends BaseFragment {
 
             case R.id.ll_authenticate://申请认证
 
-                UIHelper.showWebView(getActivity(),
-                        AppConfig.MAIN_URL + "/index.php?g=Appapi&m=auth&a=index&uid=" +
-                                mInfo.id,"");
+                UIHelper.showWebView(getActivity(), AppConfig.MAIN_URL + "/index.php?g=Appapi&m=auth&a=index&uid=" + mInfo.id,"");
                 break;
             case R.id.iv_avatar:
                 break;

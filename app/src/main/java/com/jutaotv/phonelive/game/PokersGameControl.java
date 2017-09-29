@@ -52,7 +52,7 @@ public class PokersGameControl {
         if (jinHuaPokersLayout != null) {
             mJinHuaPokersLayout = jinHuaPokersLayout;
             this.isEmcee = isemcee;
-            setOnRechargeClick(context, 1);
+//            setOnRechargeClick(context, 1);
 
             mJinHuaPokersLayout.setIsVisibleStartBtn(isEmcee);
             mJinHuaPokersLayout.setIsVisibleCloseBtn(isEmcee);
@@ -61,7 +61,7 @@ public class PokersGameControl {
         if (haiDaoPokers != null) {
             mHaiDaoPokers = haiDaoPokers;
             this.isEmcee = isemcee;
-            setOnRechargeClick(context, 2);
+//            setOnRechargeClick(context, 2);
 
             mHaiDaoPokers.setIsVisibleStartBtn(isEmcee);
             mHaiDaoPokers.setIsVisibleCloseBtn(isEmcee);
@@ -70,7 +70,7 @@ public class PokersGameControl {
         if (lucklyPanLayout != null) {
             mLucklyPanLayout = lucklyPanLayout;
             this.isEmcee = isemcee;
-            setOnRechargeClick(context, 3);
+//            setOnRechargeClick(context, 3);
 
             mLucklyPanLayout.setIsVisibleStartBtn(isEmcee);
             mLucklyPanLayout.setIsVisibleCloseBtn(isEmcee);
@@ -79,7 +79,7 @@ public class PokersGameControl {
         if (niuZaiPokersLayout != null) {
             mNiuZaiPokersLayout = niuZaiPokersLayout;
             this.isEmcee = isemcee;
-            setOnRechargeClick(context, 4);
+//            setOnRechargeClick(context, 4);
             mNiuZaiPokersLayout.setIsVisibleStartBtn(isEmcee);
             mNiuZaiPokersLayout.setIsVisibleCloseBtn(isEmcee);
             setIsVisibleBettingView(false, 4);
@@ -121,7 +121,7 @@ public class PokersGameControl {
             mNiuZaiPokersLayout.setIsVisibleStartBtn(isEmcee);
             setIsVisibleBettingView(false, 4);
         }
-        setOnRechargeClick(context, i);
+//        setOnRechargeClick(context, i);
     }
 
     //开始游戏(主播)
@@ -727,30 +727,30 @@ public class PokersGameControl {
         }
     }
 
-    public void setOnRechargeClick(final Context context, int i) {
-        if (i == 1) {
-            mJinHuaPokersLayout.setOnRechargeClick(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    UIHelper.showMyDiamonds(context);
-                }
-            });
-        } else if (i == 3) {
-            mLucklyPanLayout.setOnRechargeClick(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    UIHelper.showMyDiamonds(context);
-                }
-            });
-        } else if (i == 2) {
-            mHaiDaoPokers.setOnRechargeClick(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    UIHelper.showMyDiamonds(context);
-                }
-            });
-        }
-    }
+//    public void setOnRechargeClick(final Context context, int i) {
+//        if (i == 1) {
+//            mJinHuaPokersLayout.setOnRechargeClick(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    UIHelper.showMyDiamonds(context);
+//                }
+//            });
+//        } else if (i == 3) {
+//            mLucklyPanLayout.setOnRechargeClick(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    UIHelper.showMyDiamonds(context);
+//                }
+//            });
+//        } else if (i == 2) {
+//            mHaiDaoPokers.setOnRechargeClick(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    UIHelper.showMyDiamonds(context);
+//                }
+//            });
+//        }
+//    }
 
 
     public int getGameStatus() {

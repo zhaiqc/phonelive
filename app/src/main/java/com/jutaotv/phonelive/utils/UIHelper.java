@@ -36,6 +36,7 @@ import com.jutaotv.phonelive.ui.MainActivity;
 import com.jutaotv.phonelive.ui.UserDiamondsActivity;
 import com.jutaotv.phonelive.ui.UserInfoDetailActivity;
 import com.jutaotv.phonelive.ui.VideoPlayerActivity;
+import com.jutaotv.phonelive.ui.WebPayActivity;
 import com.jutaotv.phonelive.ui.WebViewActivity;
 
 /**
@@ -169,6 +170,18 @@ public class UIHelper {
      */
     public static void showLevel(Context context) {
         Intent intent = new Intent(context, UserLevelActivity.class);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 网页支付
+     *
+     * @return
+     */
+    public static void showWebPay(Context context,String position ) {
+        Intent intent = new Intent(context, WebPayActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("position",position);
         context.startActivity(intent);
     }
     /**
