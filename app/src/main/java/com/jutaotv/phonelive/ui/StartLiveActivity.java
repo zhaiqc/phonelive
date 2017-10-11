@@ -13,6 +13,7 @@ import android.media.MediaPlayer;
 import android.opengl.GLSurfaceView;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -500,20 +501,15 @@ public class StartLiveActivity extends ShowLiveActivityBase implements SearchMus
         //直播参数配置start
         mStreamer = new LiveStream(this);
         mStreamer.setUrl(rtmpPushAddress);
+        Log.d("initLivePlay: ", rtmpPushAddress);
         mStreamer.setDisplayPreview(mCameraPreview);
         mStreamer.setPreviewFps(20);
         mStreamer.setTargetFps(20);
-//        mStreamer.setVideoKBitrate(800 * 3 / 4, 800, 800 / 4);
-        mStreamer.setPreviewResolution(360,0);
-        mStreamer.setTargetResolution(360,0);
+        mStreamer.setVideoKBitrate(800 * 3 / 4, 800, 800 / 4);
+        mStreamer.setPreviewResolution(VIDEO_RESOLUTION_480P);
+        mStreamer.setTargetResolution(VIDEO_RESOLUTION_480P);
         mStreamer.setOnInfoListener(mOnInfoListener);
         mStreamer.setOnErrorListener(mOnErrorListener);
-        mStreamer.setVideoKBitrate(300, 500, 200);
-//        // 设置音频采样率 44100 11025
-//        mStreamer.setAudioSampleRate(44100);
-//        // 设置音频码率，单位为kbps，另有setAudioBitrate接口，单位为bps
-//        mStreamer.setAudioKBitrate(256);
-
         mStreamer.setEncodeMethod(StreamerConstants.ENCODE_METHOD_SOFTWARE);
 
 

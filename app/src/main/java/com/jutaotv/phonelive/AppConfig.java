@@ -14,7 +14,7 @@ import java.util.Properties;
  * 应用程序配置类：用于保存用户相关信息及设置
  */
 public class AppConfig {
-    //域名     "http://ylive.me/";http://23.91.97.155
+    //域名     "http://ylive.me/";http://23.91.97.155     http://www.zbbc.com/
     public static final String MAIN_URL = "http://ylive.me/";
     //api地址
     public static final String MAIN_URL_API = MAIN_URL + "/api/public/";
