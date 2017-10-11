@@ -52,18 +52,18 @@ public class PhoneLoginActivity extends ToolBarBaseActivity implements PlatformA
     @InjectView(R.id.et_password)
     BlackEditText mEtUserPassword;
 
-    //QQ登录
-    @InjectView(R.id.iv_other_login_qq)
-    ImageView mIvQQLogin;
-
-    @InjectView(R.id.iv_other_login_wechat)
-    ImageView mIvWechatLogin;
-
-    @InjectView(R.id.ll_other_login)
-    LinearLayout mLlOtherLogin;
+//    //QQ登录
+//    @InjectView(R.id.iv_other_login_qq)
+//    ImageView mIvQQLogin;
+//
+//    @InjectView(R.id.iv_other_login_wechat)
+//    ImageView mIvWechatLogin;
+//
+//    @InjectView(R.id.ll_other_login)
+//    LinearLayout mLlOtherLogin;
 
     private String type;
-    private String[] names = {QQ.NAME,Wechat.NAME, SinaWeibo.NAME};
+//    private String[] names = {QQ.NAME,Wechat.NAME, SinaWeibo.NAME};
 
 
     @Override
@@ -73,28 +73,22 @@ public class PhoneLoginActivity extends ToolBarBaseActivity implements PlatformA
 
     @Override
     public void initView() {
-
-        //微信登录
-        mIvWechatLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showWaitDialog("正在登录...",false);
-                type = "wx";
-                otherLogin(names[1]);
-
-
-            }
-        });
-        //QQ登录
-        mIvQQLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showWaitDialog("正在登录...",false);
-                type = "qq";
-                otherLogin(names[0]);
-
-            }
-        });
+//
+//        //微
+//
+//
+//            }
+//        });
+//        //QQ登录
+//        mIvQQLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showWaitDialog("正在登录...",false);
+//                type = "qq";
+//                otherLogin(names[0]);
+//
+//            }
+//        });
 
         mActivityTitle.setMoreListener(new View.OnClickListener() {
             @Override
@@ -197,8 +191,7 @@ public class PhoneLoginActivity extends ToolBarBaseActivity implements PlatformA
            JSONArray requestRes = ApiUtils.checkIsSuccess(s);
 
             if(requestRes != null){
-
-               Gson gson = new Gson();
+                Gson gson = new Gson();
                try {
                    UserBean user = gson.fromJson(requestRes.getString(0), UserBean.class);
 //                   Log.d("onResponse: ", String.valueOf(user.user_nicename));

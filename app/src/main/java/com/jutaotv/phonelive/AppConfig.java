@@ -14,15 +14,15 @@ import java.util.Properties;
  * 应用程序配置类：用于保存用户相关信息及设置
  */
 public class AppConfig {
-    //域名
-        public static final String MAIN_URL ="http://www.zbbc.com";
+    //域名     "http://ylive.me/";http://23.91.97.155
+    public static final String MAIN_URL = "http://ylive.me/";
     //api地址
     public static final String MAIN_URL_API = MAIN_URL + "/api/public/";
     //支付宝回调地址
     public static final String AP_LI_PAY_NOTIFY_URL = MAIN_URL + "/Appapi/Pay/notify_ali";
 
     public static String GLOBAL_WX_KEY = "";//微信KEY
-    public static String TICK_NAME     = ""; //魅力值昵称
+    public static String TICK_NAME = ""; //魅力值昵称
     public static String CURRENCY_NAME = ""; //钻石
     public static int JOIN_ROOM_ANIMATION_LEVEL = 0;//进场动画等级限制
     public static int ROOM_CHARGE_SWITCH = 0;//收费房间开关
@@ -39,9 +39,9 @@ public class AppConfig {
 
     public static final String KEY_FRITST_START = "KEY_FRIST_START";
 
-    public static final String KEY_NIGHT_MODE_SWITCH="night_mode_switch";
+    public static final String KEY_NIGHT_MODE_SWITCH = "night_mode_switch";
 
-    public static final int USER_INFO_MAXLEN    = 20;
+    public static final int USER_INFO_MAXLEN = 20;
 
 
     // 默认存放图片的路径

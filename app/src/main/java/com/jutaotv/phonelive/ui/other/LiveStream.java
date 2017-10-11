@@ -3,7 +3,6 @@ package com.jutaotv.phonelive.ui.other;
 import android.content.Context;
 
 import com.ksyun.media.rtc.kit.KSYRtcStreamer;
-import com.ksyun.media.streamer.kit.KSYStreamer;
 
 
 /**
@@ -11,7 +10,8 @@ import com.ksyun.media.streamer.kit.KSYStreamer;
  */
 public class LiveStream extends KSYRtcStreamer {
     private int musicVolue;
-    private int mvoice ;
+    private int mvoice;
+
     public LiveStream(Context context) {
         super(context);
     }

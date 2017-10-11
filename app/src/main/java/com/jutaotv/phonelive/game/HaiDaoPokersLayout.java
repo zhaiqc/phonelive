@@ -73,6 +73,7 @@ public class HaiDaoPokersLayout extends RelativeLayout {
     private Button mBtnGameStart, mBtnGameClose;
 
     public HaiDaoPokersLayout(Context context) {
+
         super(context);
 
         init(context);
@@ -81,6 +82,7 @@ public class HaiDaoPokersLayout extends RelativeLayout {
     public HaiDaoPokersLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
+
     }
 
     public HaiDaoPokersLayout(Context context, AttributeSet attrs, int defStyleAttr) {

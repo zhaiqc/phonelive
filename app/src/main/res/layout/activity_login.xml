@@ -120,8 +120,8 @@
             />
     </RelativeLayout>
 
-    <include
-        layout="@layout/view_other_login"
-        />
+    <!--<include-->
+        <!--layout="@layout/view_other_login"-->
+        <!--/>-->
 
 </RelativeLayout>

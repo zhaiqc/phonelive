@@ -33,17 +33,36 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.hyphenate.util.NetUtils;
 import com.jutaotv.phonelive.AppContext;
+import com.jutaotv.phonelive.R;
 import com.jutaotv.phonelive.api.remote.ApiUtils;
+import com.jutaotv.phonelive.api.remote.PhoneLiveApi;
 import com.jutaotv.phonelive.base.ShowLiveActivityBase;
 import com.jutaotv.phonelive.bean.ChatBean;
+import com.jutaotv.phonelive.bean.SendGiftBean;
 import com.jutaotv.phonelive.bean.UserBean;
 import com.jutaotv.phonelive.bean.UserHomePageBean;
+import com.jutaotv.phonelive.event.Event;
 import com.jutaotv.phonelive.fragment.MusicPlayerDialogFragment;
+import com.jutaotv.phonelive.fragment.SearchMusicDialogFragment;
 import com.jutaotv.phonelive.game.PokersGameControl;
 import com.jutaotv.phonelive.interf.ChatServerInterface;
+import com.jutaotv.phonelive.interf.DialogInterface;
 import com.jutaotv.phonelive.ui.dialog.LiveCommon;
+import com.jutaotv.phonelive.ui.other.ChatServer;
+import com.jutaotv.phonelive.ui.other.LiveStream;
+import com.jutaotv.phonelive.utils.DialogHelp;
+import com.jutaotv.phonelive.utils.InputMethodUtils;
+import com.jutaotv.phonelive.utils.LiveUtils;
+import com.jutaotv.phonelive.utils.ShareUtils;
 import com.jutaotv.phonelive.utils.SocketMsgUtils;
+import com.jutaotv.phonelive.utils.StringUtils;
+import com.jutaotv.phonelive.utils.TDevice;
+import com.jutaotv.phonelive.utils.TLog;
 import com.jutaotv.phonelive.utils.ThreadManager;
+import com.jutaotv.phonelive.widget.GridViewWithHeaderAndFooter;
+import com.jutaotv.phonelive.widget.music.DefaultLrcBuilder;
+import com.jutaotv.phonelive.widget.music.ILrcBuilder;
+import com.jutaotv.phonelive.widget.music.LrcRow;
 import com.jutaotv.phonelive.widget.music.LrcView;
 import com.ksyun.media.player.IMediaPlayer;
 import com.ksyun.media.player.KSYMediaPlayer;
@@ -52,25 +71,6 @@ import com.ksyun.media.rtc.kit.RTCConstants;
 import com.ksyun.media.streamer.capture.camera.CameraTouchHelper;
 import com.ksyun.media.streamer.kit.KSYStreamer;
 import com.ksyun.media.streamer.kit.StreamerConstants;
-import com.jutaotv.phonelive.event.Event;
-import com.jutaotv.phonelive.fragment.SearchMusicDialogFragment;
-import com.jutaotv.phonelive.ui.other.ChatServer;
-import com.jutaotv.phonelive.utils.InputMethodUtils;
-import com.jutaotv.phonelive.utils.StringUtils;
-import com.jutaotv.phonelive.utils.TDevice;
-import com.jutaotv.phonelive.utils.TLog;
-import com.jutaotv.phonelive.widget.GridViewWithHeaderAndFooter;
-import com.jutaotv.phonelive.widget.music.ILrcBuilder;
-import com.jutaotv.phonelive.widget.music.LrcRow;
-import com.jutaotv.phonelive.R;
-import com.jutaotv.phonelive.api.remote.PhoneLiveApi;
-import com.jutaotv.phonelive.bean.SendGiftBean;
-import com.jutaotv.phonelive.interf.DialogInterface;
-import com.jutaotv.phonelive.ui.other.LiveStream;
-import com.jutaotv.phonelive.utils.DialogHelp;
-import com.jutaotv.phonelive.utils.LiveUtils;
-import com.jutaotv.phonelive.utils.ShareUtils;
-import com.jutaotv.phonelive.widget.music.DefaultLrcBuilder;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.greenrobot.eventbus.EventBus;
@@ -503,11 +503,19 @@ public class StartLiveActivity extends ShowLiveActivityBase implements SearchMus
         mStreamer.setDisplayPreview(mCameraPreview);
         mStreamer.setPreviewFps(20);
         mStreamer.setTargetFps(20);
-        mStreamer.setVideoKBitrate(800 * 3 / 4, 800, 800 / 4);
-        mStreamer.setPreviewResolution(VIDEO_RESOLUTION_480P);
-        mStreamer.setTargetResolution(VIDEO_RESOLUTION_480P);
+//        mStreamer.setVideoKBitrate(800 * 3 / 4, 800, 800 / 4);
+        mStreamer.setPreviewResolution(360,0);
+        mStreamer.setTargetResolution(360,0);
         mStreamer.setOnInfoListener(mOnInfoListener);
         mStreamer.setOnErrorListener(mOnErrorListener);
+        mStreamer.setVideoKBitrate(300, 500, 200);
+//        // 设置音频采样率 44100 11025
+//        mStreamer.setAudioSampleRate(44100);
+//        // 设置音频码率，单位为kbps，另有setAudioBitrate接口，单位为bps
+//        mStreamer.setAudioKBitrate(256);
+
+        mStreamer.setEncodeMethod(StreamerConstants.ENCODE_METHOD_SOFTWARE);
+
 
         mStreamer.getRtcClient().setRTCErrorListener(mRTCErrorListener);
         mStreamer.getRtcClient().setRTCEventListener(mRTCEventListener);
@@ -535,8 +543,9 @@ public class StartLiveActivity extends ShowLiveActivityBase implements SearchMus
         //连接到socket服务端
         mChatServer.connectSocketServer(mUser, mStreamName, mUser.id);
     }
-//R.id.iv_game_open,
-    @OnClick({R.id.iv_live_rtc, R.id.btn_live_sound, R.id.iv_live_emcee_head, R.id.tglbtn_danmu_setting, R.id.ll_live_room_info, R.id.btn_live_end_music, R.id.iv_live_music, R.id.iv_live_meiyan, R.id.iv_live_camera_control, R.id.camera_preview, R.id.iv_live_privatechat, R.id.iv_live_back, R.id.ll_yp_labe, R.id.iv_live_chat, R.id.bt_send_chat,R.id.iv_live_shar})
+
+    //R.id.iv_game_open,
+    @OnClick({R.id.iv_live_rtc, R.id.btn_live_sound, R.id.iv_live_emcee_head, R.id.tglbtn_danmu_setting, R.id.ll_live_room_info, R.id.btn_live_end_music, R.id.iv_live_music, R.id.iv_live_meiyan, R.id.iv_live_camera_control, R.id.camera_preview, R.id.iv_live_privatechat, R.id.iv_live_back, R.id.ll_yp_labe, R.id.iv_live_chat, R.id.bt_send_chat, R.id.iv_live_shar})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -963,7 +972,7 @@ public class StartLiveActivity extends ShowLiveActivityBase implements SearchMus
                             mLucklyPanLayout.setVisibility(View.GONE);
                             mButtonMenuFrame.setTranslationY(TDevice.getScreenWidth() / 2 - TDevice.dpToPixel(170));
                             mLlPan.setTranslationY(TDevice.dpToPixel(20));
-                            isStartGame=false;
+                            isStartGame = false;
                             break;
                     }
 
@@ -980,7 +989,7 @@ public class StartLiveActivity extends ShowLiveActivityBase implements SearchMus
 
                         case PokersGameControl.POKERS_OPEN_VIEW:
                             mHaiDaoPokers.setVisibility(View.VISIBLE);
-                            isStartGame=true;
+                            isStartGame = true;
                             break;
 
                         case PokersGameControl.POKERS_START_GAME:
@@ -1004,7 +1013,7 @@ public class StartLiveActivity extends ShowLiveActivityBase implements SearchMus
                         case PokersGameControl.POKERS_CLOSE_GAME:
                             mPokersGameControl.initGameView(StartLiveActivity.this, 2);
                             mHaiDaoPokers.setVisibility(View.GONE);
-                            isStartGame=false;
+                            isStartGame = false;
                             break;
                     }
 
@@ -1022,7 +1031,7 @@ public class StartLiveActivity extends ShowLiveActivityBase implements SearchMus
                         case PokersGameControl.POKERS_OPEN_VIEW:
 
                             mNiuZaiPokersLayout.setVisibility(View.VISIBLE);
-                            isStartGame=true;
+                            isStartGame = true;
                             break;
 
                         case PokersGameControl.POKERS_START_GAME:
@@ -1046,7 +1055,7 @@ public class StartLiveActivity extends ShowLiveActivityBase implements SearchMus
                         case PokersGameControl.POKERS_CLOSE_GAME:
                             mPokersGameControl.initGameView(StartLiveActivity.this, 4);
                             mNiuZaiPokersLayout.setVisibility(View.GONE);
-                            isStartGame=false;
+                            isStartGame = false;
                             break;
                     }
 
