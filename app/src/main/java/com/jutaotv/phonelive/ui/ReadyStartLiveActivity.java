@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,6 +117,7 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
     private boolean isClickStartLive = false;
     private String type = "0";
     private String type_val = "";
+
 
     private final static int CROP = 400;
 
@@ -352,6 +354,7 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
      * 请求服务端添加直播记录,分享直播
      */
     private void createRoom() {
+
         if (shareType != 7) {
             ShareUtils.share(ReadyStartLiveActivity.this, shareType, mUser, null);
         } else {
@@ -367,10 +370,13 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
      * @dw 准备直播
      */
     private void readyStart() {
+        Log.d("readyStart: ","type:"+type+"**********type_val:"+type_val);
+
         if (mUser.id == null || StringUtils.toInt(mUser.id) <= 0) {
             showToast3("请登录后开播", 0);
             return;
         }
+
         //请求服务端
         PhoneLiveApi.createLive(mUser.id, mUser.avatar, mUser.avatar_thumb, StringUtils.getNewString(mStartLiveTitle.getText().toString()), mUser.token, mUser.user_nicename, protraitFile, type, type_val,
                 new StringCallback() {
@@ -381,6 +387,7 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
 
                     @Override
                     public void onResponse(String s, int id) {
+
                         JSONArray res = ApiUtils.checkIsSuccess(s);
                         if (res != null) {
                             try {

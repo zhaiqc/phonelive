@@ -185,7 +185,7 @@
     <string name="game_stop">揭晓结果</string>
     <string name="login_awrad">欢迎回来！</string>
     <string name="login_receive">领取</string>
-
+    <string name="charge">收费</string>
     <string-array name="live_start_share_open">
         <item>微博分享已开</item>
         <item>微信分享已开</item>

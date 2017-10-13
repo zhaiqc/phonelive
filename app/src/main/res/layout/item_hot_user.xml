@@ -109,6 +109,16 @@
                   android:background="@drawable/ic_live2"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"/>
+              <ImageView
+                  android:visibility="gone"
+                  android:id="@+id/iv_label"
+                  android:layout_marginTop="15dp"
+                  android:layout_marginLeft="20dp"
+                  android:layout_alignParentLeft="true"
+                  android:layout_width="35dp"
+                  android:background="@drawable/charge_label"
+                  android:layout_height="40dp"
+                  android:orientation="horizontal"/>
           </RelativeLayout>
 
       </LinearLayout>
