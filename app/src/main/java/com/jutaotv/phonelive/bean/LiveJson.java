@@ -45,6 +45,10 @@ public class LiveJson implements Parcelable {
     public String pull;
     @SerializedName("thumb")
     public String thumb;
+//    @SerializedName("label")
+//    public String label;
+    @SerializedName("admission")
+    public String admission;
 
 
     @Override
@@ -65,6 +69,8 @@ public class LiveJson implements Parcelable {
         dest.writeString(this.distance);
         dest.writeString(this.pull);
         dest.writeString(this.thumb);
+//        dest.writeString(this.label);
+        dest.writeString(this.admission);
     }
 
     public LiveJson() {
@@ -82,6 +88,8 @@ public class LiveJson implements Parcelable {
         this.distance = in.readString();
         this.pull = in.readString();
         this.thumb = in.readString();
+//        this.label = in.readString();
+        this.admission = in.readString();
     }
 
     public static final Parcelable.Creator<LiveJson> CREATOR = new Parcelable.Creator<LiveJson>() {

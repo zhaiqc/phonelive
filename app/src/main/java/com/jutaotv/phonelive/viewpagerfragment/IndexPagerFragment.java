@@ -15,6 +15,7 @@ import com.jutaotv.phonelive.base.BaseFragment;
 import com.jutaotv.phonelive.fragment.AttentionFragment;
 import com.jutaotv.phonelive.fragment.HotFragment;
 import com.jutaotv.phonelive.interf.PagerSlidingInterface;
+import com.jutaotv.phonelive.fragment.ChargeFragment;
 import com.jutaotv.phonelive.ui.other.PhoneLivePrivateChat;
 import com.jutaotv.phonelive.utils.UIHelper;
 import com.jutaotv.phonelive.widget.PagerSlidingTabStrip;
@@ -119,8 +120,7 @@ public class IndexPagerFragment extends BaseFragment implements ListenMessage {
         viewPageFragmentAdapter.addTab(getString(R.string.attention), "gz", AttentionFragment.class, getBundle());
         viewPageFragmentAdapter.addTab(getString(R.string.hot), "rm", HotFragment.class, getBundle());
         viewPageFragmentAdapter.addTab(getString(R.string.daren), "dr", NewestFragment.class, getBundle());
-
-
+        viewPageFragmentAdapter.addTab(getString(R.string.charge), "rm", ChargeFragment.class, getBundle());
         pager.setAdapter(viewPageFragmentAdapter);
 
         pager.setOffscreenPageLimit(2);
@@ -153,7 +153,7 @@ public class IndexPagerFragment extends BaseFragment implements ListenMessage {
             @Override
             public void onPageSelected(int position) {
 
-                mRegion.setVisibility(3 == position ? View.VISIBLE : View.GONE);
+//                mRegion.setVisibility(3 == position ? View.VISIBLE : View.GONE);
 
             }
 
@@ -245,5 +245,6 @@ public class IndexPagerFragment extends BaseFragment implements ListenMessage {
 
         return bundle;
     }
+
 
 }

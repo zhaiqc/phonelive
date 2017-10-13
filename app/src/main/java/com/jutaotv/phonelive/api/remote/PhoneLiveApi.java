@@ -46,6 +46,21 @@ public class PhoneLiveApi {
 
     }
 
+    /**
+     * @dw 获取收费
+     */
+    public static void getChargeUserList(StringCallback callback) {
+
+        //HHH 2016-09-09
+        OkHttpUtils.get()
+                .url(AppConfig.MAIN_URL_API)
+                .addParams("service", "Home.getCharge")
+                .tag("getCharge")
+                .build()
+                .execute(callback);
+
+    }
+
     //HHH 2016-09-09
     public static void reg(String user_login, String user_pass, String user_pass2,  StringCallback callback) {
         String url = AppConfig.MAIN_URL_API;
