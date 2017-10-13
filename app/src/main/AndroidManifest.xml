@@ -104,6 +104,7 @@
             </intent-filter>
         </receiver>
 
+
         <activity
             android:name="com.jutaotv.phonelive.ui.MainActivity"
             android:configChanges="keyboardHidden|orientation"

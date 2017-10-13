@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,9 +67,11 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity implements
                     AppContext.lat = String.valueOf(amapLocation.getLatitude());
                     AppContext.province = amapLocation.getProvince();
                     AppContext.address =  amapLocation.getCity();
+                    Log.d("onLocationChanged: ", amapLocation.getCity()+"1213213131313");
                     PhoneLiveApi.saveInfo(LiveUtils.getFiledJson("city",AppContext.address),getUserID(),AppContext.getInstance().getToken(),null);
 
                 } else {
+                    Log.d( "onLocationChanged: ","定位失败："+amapLocation.getErrorCode());
                     //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                     TLog.log("location Error, ErrCode:"
                             + amapLocation.getErrorCode() + ", errInfo:"

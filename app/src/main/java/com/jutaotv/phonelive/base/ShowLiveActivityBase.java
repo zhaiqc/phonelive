@@ -1539,15 +1539,15 @@ public class ShowLiveActivityBase extends ToolBarBaseActivity {
         if (newY > mSubMaxY) {
             newY = mSubMaxY;
         }
-        //小窗的width和height不发生变化
-        RectF subRect = mStreamer.getRTCSubScreenRect();
-        float width = subRect.width();
-        float height = subRect.height();
-
-        float left = newX / screenWidth;
-        float top = newY / sceenHeight;
-
-        mStreamer.setRTCSubScreenRect(left, top, width, height, RTCConstants.SCALING_MODE_CENTER_CROP);
+//        //小窗的width和height不发生变化
+//        RectF subRect = mStreamer.getRTCSubScreenRect();
+//        float width = subRect.width();
+//        float height = subRect.height();
+//
+//        float left = newX / screenWidth;
+//        float top = newY / sceenHeight;
+//
+//        mStreamer.setRTCSubScreenRect(left, top, width, height, RTCConstants.SCALING_MODE_CENTER_CROP);
     }
 
     protected void initBeautyUI(final LiveStream mStreamer) {

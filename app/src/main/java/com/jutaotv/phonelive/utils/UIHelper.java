@@ -41,10 +41,9 @@ import com.jutaotv.phonelive.ui.WebViewActivity;
 
 /**
  * 界面帮助类
- * 
+ *
  * @author FireAnt（http://my.oschina.net/LittleDY）
  * @version 创建时间：2014年10月10日 下午3:33:36
- * 
  */
 
 public class UIHelper {
@@ -57,6 +56,7 @@ public class UIHelper {
         /*Intent intent = new Intent(NoticeService.INTENT_ACTION_BROADCAST);
         context.sendBroadcast(intent);*/
     }
+
     /**
      * 手机登录
      *
@@ -89,6 +89,7 @@ public class UIHelper {
         Intent intent = new Intent(context, PhoneFindPassActivity.class);
         context.startActivity(intent);
     }
+
     /**
      * 登陆选择
      *
@@ -115,6 +116,7 @@ public class UIHelper {
         context.startActivity(intent);
 
     }
+
     /**
      * 我的详细资料
      *
@@ -124,6 +126,7 @@ public class UIHelper {
         Intent intent = new Intent(context, UserInfoDetailActivity.class);
         context.startActivity(intent);
     }
+
     /**
      * 编辑资料
      *
@@ -132,9 +135,9 @@ public class UIHelper {
     public static void showEditInfoActivity(UserInfoDetailActivity context, String action,
                                             String prompt, String defaultStr, ChangInfo changInfo) {
         Intent intent = new Intent(context, EditInfoActivity.class);
-        intent.putExtra(EditInfoActivity.EDITACTION,action);
-        intent.putExtra(EditInfoActivity.EDITDEFAULT,defaultStr);
-        intent.putExtra(EditInfoActivity.EDITPROMP,prompt);
+        intent.putExtra(EditInfoActivity.EDITACTION, action);
+        intent.putExtra(EditInfoActivity.EDITDEFAULT, defaultStr);
+        intent.putExtra(EditInfoActivity.EDITPROMP, prompt);
         intent.putExtra(EditInfoActivity.EDITKEY, changInfo.getAction());
         context.startActivity(intent);
         context.overridePendingTransition(R.anim.activity_open_start, 0);
@@ -142,7 +145,7 @@ public class UIHelper {
 
     public static void showSelectAvatar(UserInfoDetailActivity context, String avatar) {
         Intent intent = new Intent(context, UserSelectAvatarActivity.class);
-        intent.putExtra("uhead",avatar);
+        intent.putExtra("uhead", avatar);
         context.startActivity(intent);
         context.overridePendingTransition(R.anim.activity_open_start, 0);
     }
@@ -178,12 +181,14 @@ public class UIHelper {
      *
      * @return
      */
-    public static void showWebPay(Context context,String position ) {
+    public static void showWebPay(Context context, String position) {
         Intent intent = new Intent(context, WebPayActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("position",position);
+        intent.putExtra("position", position);
         context.startActivity(intent);
     }
+
+
     /**
      * 我的钻石
      *
@@ -193,6 +198,7 @@ public class UIHelper {
         Intent intent = new Intent(context, UserDiamondsActivity.class);
         context.startActivity(intent);
     }
+
     /**
      * 我的收益
      *
@@ -202,6 +208,7 @@ public class UIHelper {
         Intent intent = new Intent(context, UserProfitActivity.class);
         context.startActivity(intent);
     }
+
     /**
      * 设置
      *
@@ -211,6 +218,7 @@ public class UIHelper {
         Intent intent = new Intent(context, SettingActivity.class);
         context.startActivity(intent);
     }
+
     /**
      * 看直播
      *
@@ -218,9 +226,10 @@ public class UIHelper {
      */
     public static void showLookLiveActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, VideoPlayerActivity.class);
-        intent.putExtra(VideoPlayerActivity.USER_INFO,bundle);
+        intent.putExtra(VideoPlayerActivity.USER_INFO, bundle);
         context.startActivity(intent);
     }
+
     /**
      * 直播
      *
@@ -230,100 +239,114 @@ public class UIHelper {
         Intent intent = new Intent(context, ReadyStartLiveActivity.class);
         context.startActivity(intent);
     }
+
     /*
     * 其他用户个人信息
     * */
-    public static void showHomePageActivity(Context context,String id) {
+    public static void showHomePageActivity(Context context, String id) {
         Intent intent = new Intent(context, HomePageActivity.class);
-        intent.putExtra("uid",id);
+        intent.putExtra("uid", id);
         context.startActivity(intent);
     }
+
     /*
     * 粉丝列表
     * */
     public static void showFansActivity(Context context, String uid) {
         Intent intent = new Intent(context, FansActivity.class);
-        intent.putExtra("uid",uid);
+        intent.putExtra("uid", uid);
         context.startActivity(intent);
     }
+
     /*
     * 关注列表
     * */
     public static void showAttentionActivity(Context context, String uid) {
         Intent intent = new Intent(context, AttentionActivity.class);
-        intent.putExtra("uid",uid);
+        intent.putExtra("uid", uid);
         context.startActivity(intent);
     }
+
     //魅力值贡献榜
     public static void showDedicateOrderActivity(Context context, String uid) {
 
         Intent intent = new Intent(context, DedicateOrderActivity.class);
-        intent.putExtra("uid",uid);
+        intent.putExtra("uid", uid);
         context.startActivity(intent);
     }
+
     //直播记录
     public static void showLiveRecordActivity(Context context, String uid) {
         Intent intent = new Intent(context, LiveRecordActivity.class);
-        intent.putExtra("uid",uid);
+        intent.putExtra("uid", uid);
         context.startActivity(intent);
     }
+
     //私信页面
     public static void showPrivateChatSimple(Context context, String uid) {
         Intent intent = new Intent(context, SimpleBackActivity.class);
-        intent.putExtra("uid",uid);
+        intent.putExtra("uid", uid);
         intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, SimpleBackPage.USER_PRIVATECORE.getValue());
         context.startActivity(intent);
     }
+
     //私信详情
     public static void showPrivateChatMessage(Context context, PrivateChatUserBean user) {
         Intent intent = new Intent(context, SimpleBackActivity.class);
-        intent.putExtra("user",user);
+        intent.putExtra("user", user);
         intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, SimpleBackPage.USER_PRIVATECORE_MESSAGE.getValue());
         context.startActivity(intent);
 
     }
+
     //地区选择
     public static void showSelectArea(Context context) {
-        Intent intent = new Intent(context,SimpleBackActivity.class);
-        intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE,SimpleBackPage.AREA_SELECT.getValue());
+        Intent intent = new Intent(context, SimpleBackActivity.class);
+        intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, SimpleBackPage.AREA_SELECT.getValue());
         context.startActivity(intent);
     }
+
     //搜索
     public static void showScreen(Context context) {
-        Intent intent = new Intent(context,SimpleBackActivity.class);
-        intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE,SimpleBackPage.INDEX_SECREEN.getValue());
+        Intent intent = new Intent(context, SimpleBackActivity.class);
+        intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, SimpleBackPage.INDEX_SECREEN.getValue());
         context.startActivity(intent);
     }
+
     //打开网页
-    public static void showWebView(Context context,String url, String title) {
+    public static void showWebView(Context context, String url, String title) {
         Intent intent = new Intent(context, WebViewActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("url",url);
-        bundle.putString("title",title);
-        intent.putExtra("URL_INFO",bundle);
+        bundle.putString("url", url);
+        bundle.putString("title", title);
+        intent.putExtra("URL_INFO", bundle);
         context.startActivity(intent);
     }
+
     //黑名单
     public static void showBlackList(Context context) {
-        Intent intent = new Intent(context,ActionBarSimpleBackActivity.class);
-        intent.putExtra(ActionBarSimpleBackActivity.BUNDLE_KEY_PAGE,SimpleBackPage.USER_BLACK_LIST.getValue());
+        Intent intent = new Intent(context, ActionBarSimpleBackActivity.class);
+        intent.putExtra(ActionBarSimpleBackActivity.BUNDLE_KEY_PAGE, SimpleBackPage.USER_BLACK_LIST.getValue());
         context.startActivity(intent);
     }
+
     //推送管理
     public static void showPushManage(Context context) {
-        Intent intent = new Intent(context,ActionBarSimpleBackActivity.class);
-        intent.putExtra(ActionBarSimpleBackActivity.BUNDLE_KEY_PAGE,SimpleBackPage.USER_PUSH_MANAGE.getValue());
+        Intent intent = new Intent(context, ActionBarSimpleBackActivity.class);
+        intent.putExtra(ActionBarSimpleBackActivity.BUNDLE_KEY_PAGE, SimpleBackPage.USER_PUSH_MANAGE.getValue());
         context.startActivity(intent);
     }
+
     //搜索歌曲
     public static void showSearchMusic(Activity context) {
-        Intent intent = new Intent(context,SimpleBackActivity.class);
-        intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE,SimpleBackPage.LIVE_START_MUSIC.getValue());
-        context.startActivityForResult(intent,1);
+        Intent intent = new Intent(context, SimpleBackActivity.class);
+        intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, SimpleBackPage.LIVE_START_MUSIC.getValue());
+        context.startActivityForResult(intent, 1);
     }
+
     //管理员列表
     public static void shoManageListActivity(Context context) {
-        Intent intent = new Intent(context,ManageListDialogFragment.class);
+        Intent intent = new Intent(context, ManageListDialogFragment.class);
         context.startActivity(intent);
     }
 
@@ -342,7 +365,6 @@ public class UIHelper {
         Intent intent = new Intent(context, RequestCashActivity.class);
         context.startActivity(intent);
     }
-
 
 
 }

@@ -15,7 +15,7 @@ import java.util.Properties;
  */
 public class AppConfig {
     //域名     "http://ylive.me/";http://23.91.97.155     http://www.zbbc.com/
-    public static final String MAIN_URL = "http://ylive.me/";
+    public static final String MAIN_URL = "  http://ylive.me";
     //api地址
     public static final String MAIN_URL_API = MAIN_URL + "/api/public/";
     //支付宝回调地址
@@ -27,6 +27,9 @@ public class AppConfig {
     public static int JOIN_ROOM_ANIMATION_LEVEL = 0;//进场动画等级限制
     public static int ROOM_CHARGE_SWITCH = 0;//收费房间开关
     public static int ROOM_PASSWORD_SWITCH = 0;//密码房间开关
+    public static String USER_VERSION = "";//最新版本
+    public static String APK_URL = "";//下载地址
+
     public static final String RTC_AUTH_SERVER = "http://rtc.vcloud.ks-live.com:6002/rtcauth";
 
     private final static String APP_CONFIG = "config";

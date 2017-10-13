@@ -1,6 +1,7 @@
 package com.jutaotv.phonelive.adapter;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,7 @@ public class LiveUserAdapter extends BaseAdapter {
             convertView.setTag(viewHolder);
         }
         LiveJson live = mUserList.get(position);
+        Log.d("getView: ",live.city );
         viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.mUserNick.setText(live.user_nicename);
         viewHolder.mUserLocal.setText(live.city);

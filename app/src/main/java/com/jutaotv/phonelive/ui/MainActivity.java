@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -86,6 +87,7 @@ public class MainActivity extends ToolBarBaseActivity implements TabHost.OnTabCh
 
     @Override
     public void initView() {
+
         AppManager.getAppManager().addActivity(this);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
         if (Build.VERSION.SDK_INT > 10) {
@@ -150,16 +152,13 @@ public class MainActivity extends ToolBarBaseActivity implements TabHost.OnTabCh
 
     @Override
     public void initData() {
+        updateConfig();
         //检查token是否过期
         checkTokenIsOutTime();
         //注册极光推送
         registerJpush();
         //登录环信
         loginIM();
-        //检查是否有最新版本
-        checkNewVersion();
-        updateConfig();
-//        Log.d("initData:",getPackageName());
 
 
         mTabHost.setCurrentTab(0);
@@ -175,15 +174,6 @@ public class MainActivity extends ToolBarBaseActivity implements TabHost.OnTabCh
     }
 
     private void updateConfig() {
-
-        /*if(SharedPreUtil.getBoolean(this,"isSaveConfig")){
-
-            AppConfig.TICK_NAME     = SharedPreUtil.getString(this,"name_votes");
-            AppConfig.CURRENCY_NAME = SharedPreUtil.getString(this,"name_coin");
-            AppConfig.JOIN_ROOM_ANIMATION_LEVEL = SharedPreUtil.getInt(this,"enter_tip_level");
-
-            return;
-        }*/
         PhoneLiveApi.getConfig(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -195,11 +185,14 @@ public class MainActivity extends ToolBarBaseActivity implements TabHost.OnTabCh
                 JSONArray res = ApiUtils.checkIsSuccess(response);
                 if (res != null) {
                     try {
+                        AppConfig.USER_VERSION = res.getJSONObject(0).getString("apk_ver");
+                        Log.d("onResponse: ", AppConfig.USER_VERSION);
                         AppConfig.TICK_NAME = res.getJSONObject(0).getString("name_votes");
                         AppConfig.CURRENCY_NAME = res.getJSONObject(0).getString("name_coin");
                         AppConfig.JOIN_ROOM_ANIMATION_LEVEL = res.getJSONObject(0).getInt("enter_tip_level");
                         AppConfig.ROOM_CHARGE_SWITCH = res.getJSONObject(0).getInt("live_cha_switch");
                         AppConfig.ROOM_PASSWORD_SWITCH = res.getJSONObject(0).getInt("live_pri_switch");
+                        AppConfig.APK_URL = res.getJSONObject(0).getString("apk_url");
                         SharedPreUtil.put(MainActivity.this, "name_votes", AppConfig.TICK_NAME);
                         SharedPreUtil.put(MainActivity.this, "name_coin", AppConfig.CURRENCY_NAME);
                         SharedPreUtil.put(MainActivity.this, "enter_tip_level", AppConfig.JOIN_ROOM_ANIMATION_LEVEL);
@@ -214,8 +207,12 @@ public class MainActivity extends ToolBarBaseActivity implements TabHost.OnTabCh
                         e.printStackTrace();
                     }
                 }
+                //检查是否有最新版本
+                checkNewVersion();
             }
         });
+
+
     }
 
     @Override
@@ -319,9 +316,17 @@ public class MainActivity extends ToolBarBaseActivity implements TabHost.OnTabCh
      * @dw 检查是否有最新版本
      */
     private void checkNewVersion() {
-        UpdateManager manager = new UpdateManager(this, true);
-        manager.checkUpdate();
-
+        UpdateManager manager;
+//        Log.d("checkNewVersion:", AppConfig.USER_VERSION + "hahahahaahahah");
+        if (!AppConfig.USER_VERSION.equals(TDevice.getVersionName())) {
+            manager = new UpdateManager(this, true);
+            manager.checkUpdate(AppConfig.APK_URL);
+//            Log.d("checkNewVersion: ", AppConfig.APK_URL);
+        }
+//        }else {
+//            manager = new UpdateManager(this, false);
+//            manager.checkUpdate(AppConfig.APK_URL);
+//        }
     }
 
     //开始直播初始化

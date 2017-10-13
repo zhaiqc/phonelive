@@ -130,6 +130,7 @@
     <string name="reset_pass">重置密码</string>
     <string name="level">等级</string>
     <string name="pay">充值</string>
+    <string name="update">升级</string>
     <string name="live_record">直播记录</string>
     <string name="not_hava_live_record">现在还没有直播记录</string>
     <string name="register">注册</string>
@@ -202,7 +203,7 @@
     </string-array>
 
     <!--高德地图-->
-    <string name="amp_val">2ec444fa426098bb1b8e5fc83dd2311e</string>
+    <string name="amp_val">df625832e9f209a458b8fb22971861ff</string>
     <!--bugly-->
     <string name="bugly_val">203765ade7</string>
     <!--极光推送-->

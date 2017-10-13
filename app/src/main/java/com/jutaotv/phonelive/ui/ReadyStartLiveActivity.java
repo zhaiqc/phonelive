@@ -372,12 +372,7 @@ public class ReadyStartLiveActivity extends ToolBarBaseActivity {
             return;
         }
         //请求服务端
-        PhoneLiveApi.createLive(mUser.id, mUser.avatar, mUser.avatar_thumb,
-                StringUtils.getNewString(mStartLiveTitle.getText().toString()), mUser.token,
-                mUser.user_nicename,
-                protraitFile,
-                type,
-                type_val,
+        PhoneLiveApi.createLive(mUser.id, mUser.avatar, mUser.avatar_thumb, StringUtils.getNewString(mStartLiveTitle.getText().toString()), mUser.token, mUser.user_nicename, protraitFile, type, type_val,
                 new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {

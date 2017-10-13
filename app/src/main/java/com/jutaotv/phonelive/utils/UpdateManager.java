@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -47,10 +48,11 @@ public class UpdateManager {
 
 
     //检测是否需要更新
-    public void checkUpdate() {
+    public void checkUpdate(String apkUrl) {
         if (isShow) {
+            showUpdateInfo(apkUrl);
+        } else {
 //            showCheckDialog();
-        }else {
             PhoneLiveApi.getConfig(callback);
         }
 
@@ -58,30 +60,46 @@ public class UpdateManager {
 
     private StringCallback callback = new StringCallback() {
         @Override
-        public void onError(Call call, Exception e,int id) {
-            //hideCheckDialog();
-            Toast.makeText(mContext,"获取网络数据失败",Toast.LENGTH_SHORT).show();
+        public void onError(Call call, Exception e, int id) {
+            hideCheckDialog();
+            Toast.makeText(mContext, "获取网络数据失败", Toast.LENGTH_SHORT).show();
         }
 
         @Override
-        public void onResponse(String response,int id) {
-            //hideCheckDialog();
+        public void onResponse(String response, int id) {
+            hideCheckDialog();
             JSONArray res = ApiUtils.checkIsSuccess(response);
-            if(null != res){
+            Log.d( "onResponse: ", String.valueOf(res));
+            if (null != res) {
+
                 try {
-                    JSONObject config = res.getJSONObject(0);
-                    if(!String.valueOf(AppContext.getInstance().getPackageInfo().versionName).equals(
-                            config.getString("apk_ver"))){
-                        showUpdateInfo(config.getString("apk_url"));
-                    }
-                    else{
-                        if(isShow) {
-                            Toast.makeText(mContext, "您的版本已是最新", Toast.LENGTH_SHORT).show();
-                        }
+                    if (!TDevice.getVersionName().equals(res.getJSONObject(0).getString("apk_ver"))){
+                        checkUpdate(AppConfig.APK_URL);
+                    }else {
+                        Toast.makeText(mContext, "您的版本已是最新", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+
+                //   AppConfig.USER_VERSION = res.getJSONObject(0).getString("apk_ver");
+                //    AppConfig.APK_URL =res.getJSONObject(0).getString("apk_url");
+
+
+//                    try {
+//                    JSONObject config = res.getJSONObject(0);
+//                    if (!String.valueOf(AppContext.getInstance().getPackageInfo().versionName).equals(
+//                            config.getString("apk_ver"))) {
+//                        showUpdateInfo(config.getString("apk_url"));
+//                    } else {
+//                        if (isShow) {
+//                            Toast.makeText(mContext, "您的版本已是最新", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
 
             }
 
@@ -102,25 +120,32 @@ public class UpdateManager {
     }
 
     //弹窗提示
-    private void showUpdateInfo(final String apiUrl) {
+    private void showUpdateInfo(final String apkUrl) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("提示");
         builder.setMessage("发现新版本!");
-        /*builder.setNegativeButton("取消", new android.content.DialogInterface.OnClickListener() {
+        builder.setNegativeButton("取消", new android.content.DialogInterface.OnClickListener() {
             @Override
             public void onClick(android.content.DialogInterface dialogInterface, int i) {
 
             }
-        });*/
+        });
         builder.setPositiveButton("确定", new android.content.DialogInterface.OnClickListener() {
             @Override
             public void onClick(android.content.DialogInterface dialogInterface, int i) {
-                //upDataApp(apiUrl);
-
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(apiUrl));
+//                upDataApp(apiUrl);
+//                Intent intent =new Intent();
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse(apkUrl);
+                intent.setData(content_url);
                 mContext.startActivity(intent);
-                dialog.dismiss();
+
+
+//                Intent intent = new Intent(Intent.ACTION_VIEW);
+//                intent.setData(Uri.parse(apiUrl));
+//                mContext.startActivity(intent);
+//                dialog.dismiss();
             }
         });
         dialog = builder.create();
@@ -133,50 +158,51 @@ public class UpdateManager {
 
     //下载app
     private void upDataApp(String apiUrl) {
-        if(!apiUrl.substring(apiUrl.length() - 4,apiUrl.length()) .equals(".apk")){
-            Toast.makeText(AppContext.getInstance(),"安装包不存在",Toast.LENGTH_LONG).show();
+        if (!apiUrl.substring(apiUrl.length() - 4, apiUrl.length()).equals(".apk")) {
+            Toast.makeText(AppContext.getInstance(), "安装包不存在", Toast.LENGTH_LONG).show();
             return;
         }
         //判断是否存在
         File file = new File(AppConfig.DEFAULT_SAVE_FILE_PATH + "app.apk");
-        if(file.exists()){
+        if (file.exists()) {
             file.delete();
         }
 
 
-        View view = View.inflate(mContext,R.layout.dialog_show_download_view,null);
+        View view = View.inflate(mContext, R.layout.dialog_show_download_view, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("正在下载中...");
         builder.setView(view);
         builder.create().show();
-        PhoneLiveApi.getNewVersionApk(apiUrl,new FileCallBack(AppConfig.DEFAULT_SAVE_FILE_PATH,"app.apk"){
+        PhoneLiveApi.getNewVersionApk(apiUrl, new FileCallBack(AppConfig.DEFAULT_SAVE_FILE_PATH, "app.apk") {
 
             @Override
-            public void onError(Call call, Exception e,int id) {
-                Toast.makeText(mContext,"安装包下载失败!",Toast.LENGTH_SHORT).show();
+            public void onError(Call call, Exception e, int id) {
+                Toast.makeText(mContext, "安装包下载失败!", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
 
             @Override
-            public void onResponse(File response,int id) {
+            public void onResponse(File response, int id) {
                 installApk();
                 dialog.dismiss();
             }
 
             @Override
-            public void inProgress(float progress, long total,int id) {
+            public void inProgress(float progress, long total, int id) {
 
             }
         });
     }
+
     //安装app
     private void installApk() {
         File file = new File(AppConfig.DEFAULT_SAVE_FILE_PATH + "app.apk");
-        if(!file.exists()){
+        if (!file.exists()) {
             return;
         }
-        TDevice.installAPK(mContext,file);
+        TDevice.installAPK(mContext, file);
     }
 
     private void showLatestDialog() {
