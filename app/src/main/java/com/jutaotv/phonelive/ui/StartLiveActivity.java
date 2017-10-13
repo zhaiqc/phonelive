@@ -1628,6 +1628,12 @@ public class StartLiveActivity extends ShowLiveActivityBase implements SearchMus
                 mStreamer.switchCamera();
             }
         });
+        popView.findViewById(R.id.iv_live_music).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSearchMusicDialog();
+            }
+        });
         popView.findViewById(R.id.iv_live_shar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
