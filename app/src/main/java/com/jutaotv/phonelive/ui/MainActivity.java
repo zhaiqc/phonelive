@@ -186,7 +186,6 @@ public class MainActivity extends ToolBarBaseActivity implements TabHost.OnTabCh
                 if (res != null) {
                     try {
                         AppConfig.USER_VERSION = res.getJSONObject(0).getString("apk_ver");
-                        Log.d("onResponse: ", AppConfig.USER_VERSION);
                         AppConfig.TICK_NAME = res.getJSONObject(0).getString("name_votes");
                         AppConfig.CURRENCY_NAME = res.getJSONObject(0).getString("name_coin");
                         AppConfig.JOIN_ROOM_ANIMATION_LEVEL = res.getJSONObject(0).getInt("enter_tip_level");
