@@ -14,9 +14,7 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:weightSum="3">
-            <LinearLayout
-                android:id="@+id/ll_home_page_menu_follow"
-                style="@style/home_page_user_info_bottom_menu">
+            <LinearLayout style="@style/home_page_user_info_bottom_menu">
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"

@@ -67,8 +67,8 @@ import com.jutaotv.phonelive.widget.music.LrcRow;
 import com.jutaotv.phonelive.widget.music.LrcView;
 import com.ksyun.media.player.IMediaPlayer;
 import com.ksyun.media.player.KSYMediaPlayer;
-import com.ksyun.media.rtc.kit.RTCClient;
-import com.ksyun.media.rtc.kit.RTCConstants;
+//import com.ksyun.media.rtc.kit.RTCClient;
+//import com.ksyun.media.rtc.kit.RTCConstants;
 import com.ksyun.media.streamer.capture.camera.CameraTouchHelper;
 import com.ksyun.media.streamer.kit.KSYStreamer;
 import com.ksyun.media.streamer.kit.StreamerConstants;
@@ -389,55 +389,55 @@ public class StartLiveActivity extends ShowLiveActivityBase implements SearchMus
         }
     }
 
-    //连麦监听
-    private RTCClient.RTCEventChangedListener mRTCEventListener = new RTCClient.RTCEventChangedListener() {
-        @Override
-        public void onEventChanged(final int event, final Object arg1) {
-            switch (event) {
-                case RTCClient.RTC_EVENT_REGISTED:
-                    mIsRegisted = true;
-                    break;
-                case RTCClient.RTC_EVENT_STARTED:
-                    break;
-                case RTCClient.RTC_EVENT_CALL_COMMING:
-                    if (mRtcView != null)
-                        mRtcView.setVisibility(View.VISIBLE);
-                    int i = arg1.toString().indexOf(RTC_UINIQUE_NAME);
-                    getUserInfo(arg1.toString().substring(0, i));
-                    break;
-                case RTCClient.RTC_EVENT_STOPPED:
-                    break;
-                case RTCClient.RTC_EVENT_UNREGISTED:
-                    break;
-                default:
-                    break;
-            }
-
-        }
-    };
-    private RTCClient.RTCErrorListener mRTCErrorListener = new RTCClient.RTCErrorListener() {
-        @Override
-        public void onError(int errorType, int arg1) {
-            switch (errorType) {
-                case RTCClient.RTC_ERROR_AUTH_FAILED:
-                    mIsRegisted = false;
-                    Toast.makeText(StartLiveActivity.this, "RTC_ERROR_AUTH_FAILED", Toast.LENGTH_SHORT).show();
-                    break;
-                case RTCClient.RTC_ERROR_REGISTED_FAILED:
-                    mIsRegisted = false;
-//                    mStreamer.getRtcClient().registerRTC();
-                    break;
-                case RTCClient.RTC_ERROR_SERVER_ERROR:
-                    Toast.makeText(StartLiveActivity.this, "RTC_ERROR_SERVER_ERROR", Toast.LENGTH_SHORT).show();
-                case RTCClient.RTC_ERROR_CONNECT_FAIL:
-                    break;
-                case RTCClient.RTC_ERROR_STARTED_FAILED:
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+//    //连麦监听
+//    private RTCClient.RTCEventChangedListener mRTCEventListener = new RTCClient.RTCEventChangedListener() {
+//        @Override
+//        public void onEventChanged(final int event, final Object arg1) {
+//            switch (event) {
+//                case RTCClient.RTC_EVENT_REGISTED:
+//                    mIsRegisted = true;
+//                    break;
+//                case RTCClient.RTC_EVENT_STARTED:
+//                    break;
+//                case RTCClient.RTC_EVENT_CALL_COMMING:
+//                    if (mRtcView != null)
+//                        mRtcView.setVisibility(View.VISIBLE);
+//                    int i = arg1.toString().indexOf(RTC_UINIQUE_NAME);
+//                    getUserInfo(arg1.toString().substring(0, i));
+//                    break;
+//                case RTCClient.RTC_EVENT_STOPPED:
+//                    break;
+//                case RTCClient.RTC_EVENT_UNREGISTED:
+//                    break;
+//                default:
+//                    break;
+//            }
+//
+//        }
+//    };
+//    private RTCClient.RTCErrorListener mRTCErrorListener = new RTCClient.RTCErrorListener() {
+//        @Override
+//        public void onError(int errorType, int arg1) {
+//            switch (errorType) {
+//                case RTCClient.RTC_ERROR_AUTH_FAILED:
+//                    mIsRegisted = false;
+//                    Toast.makeText(StartLiveActivity.this, "RTC_ERROR_AUTH_FAILED", Toast.LENGTH_SHORT).show();
+//                    break;
+//                case RTCClient.RTC_ERROR_REGISTED_FAILED:
+//                    mIsRegisted = false;
+////                    mStreamer.getRtcClient().registerRTC();
+//                    break;
+//                case RTCClient.RTC_ERROR_SERVER_ERROR:
+//                    Toast.makeText(StartLiveActivity.this, "RTC_ERROR_SERVER_ERROR", Toast.LENGTH_SHORT).show();
+//                case RTCClient.RTC_ERROR_CONNECT_FAIL:
+//                    break;
+//                case RTCClient.RTC_ERROR_STARTED_FAILED:
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//    };
     private CameraTouchHelper.OnTouchListener mRTCSubScreenTouchListener = new CameraTouchHelper.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent event) {
@@ -1626,6 +1626,12 @@ public class StartLiveActivity extends ShowLiveActivityBase implements SearchMus
             @Override
             public void onClick(View v) {
                 mStreamer.switchCamera();
+            }
+        });
+        popView.findViewById(R.id.iv_live_music).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSearchMusicDialog();
             }
         });
         popView.findViewById(R.id.iv_live_shar).setOnClickListener(new View.OnClickListener() {

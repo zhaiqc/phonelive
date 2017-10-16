@@ -14,7 +14,6 @@
         android:visibility="gone"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:id="@+id/item_live_user_list_level"
         android:layout_width="10dp"
         android:layout_height="10dp" />
 </LinearLayout>

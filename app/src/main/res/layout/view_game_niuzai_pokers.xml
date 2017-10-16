@@ -86,7 +86,6 @@
                     android:layout_weight="1">
 
                     <ImageView
-                        android:id="@+id/iv_game_dq"
                         android:layout_width="80dp"
                         android:layout_height="120dp"
                         android:layout_centerVertical="true"
@@ -152,7 +151,6 @@
 
 
                     <ImageView
-                        android:id="@+id/iv_game_dc"
                         android:layout_width="80dp"
                         android:layout_height="120dp"
                         android:layout_centerVertical="true"
@@ -215,7 +213,6 @@
                     android:layout_weight="1">
 
                     <ImageView
-                        android:id="@+id/iv_game_xq"
                         android:layout_width="80dp"
                         android:layout_height="120dp"
                         android:layout_centerVertical="true"

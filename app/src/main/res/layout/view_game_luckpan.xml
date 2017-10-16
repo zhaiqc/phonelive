@@ -56,7 +56,6 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/ban"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -65,7 +64,6 @@
                 />
 
             <LinearLayout
-                android:id="@+id/ll_beting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"

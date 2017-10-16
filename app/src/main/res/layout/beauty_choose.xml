@@ -47,7 +47,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/grind_text"
             android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -72,7 +71,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/whiten_text"
             android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -99,7 +97,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/ruddy_text"
             android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:gravity="center"

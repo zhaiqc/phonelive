@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     signingConfigs {
         release {
             keyAlias 'phonelive'
@@ -10,17 +10,19 @@ android {
             storeFile file('../yunbao.jks')
             storePassword 'phonelive'
         }
+
+
     }
     aaptOptions {
-        cruncherEnabled=false
-        useNewCruncher=false
+        cruncherEnabled = false
+        useNewCruncher = false
     }
     defaultConfig {
         applicationId "com.jutaotv.phonelive"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 3
-        versionName "2.1.16"
+        versionName "2.1.17"
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
@@ -40,7 +42,8 @@ android {
         }
     }
     useLibrary 'org.apache.http.legacy'
-
+    productFlavors {
+    }
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -84,7 +87,7 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.hyphenate:hyphenate-sdk-lite:3.3.0'
     compile files('libs/libjingle_peerconnection_java.jar')
-    compile files('libs/libksyrtc.jar')
+//    compile files('libs/libksyrtc.jar')
     compile files('libs/ksylive.jar')
     compile files('libs/libksyplayer.jar')
     compile files('libs/libksystat.jar')

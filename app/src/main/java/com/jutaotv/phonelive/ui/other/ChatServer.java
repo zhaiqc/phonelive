@@ -152,10 +152,10 @@ public class ChatServer {
                             onLuckPanGame(socketMsg);
                             break;
                         case HAIDAO:
-                            mChatServer.onHaiDaoGame(socketMsg);
+//                            mChatServer.onHaiDaoGame(socketMsg);
                             break;
                         case KAIXINNIUZAI:
-                            mChatServer.onNiuZaiGame(socketMsg);
+//                            mChatServer.onNiuZaiGame(socketMsg);
                             break;
                     }
                 }
@@ -169,13 +169,13 @@ public class ChatServer {
     //游戏1
     private void onJinhuaGameMsg(SocketMsgUtils socketMsg) {
 
-        mChatServer.onJinhuaGameMessageListen(socketMsg);
+//        mChatServer.onJinhuaGameMessageListen(socketMsg);
 
     }
 
     //游戏2
     private void onLuckPanGame(SocketMsgUtils socketMsg) {
-        mChatServer.onLuckPanGame(socketMsg);
+//        mChatServer.onLuckPanGame(socketMsg);
 
     }
 

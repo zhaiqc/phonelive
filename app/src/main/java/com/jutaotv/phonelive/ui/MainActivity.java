@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -186,7 +185,6 @@ public class MainActivity extends ToolBarBaseActivity implements TabHost.OnTabCh
                 if (res != null) {
                     try {
                         AppConfig.USER_VERSION = res.getJSONObject(0).getString("apk_ver");
-                        Log.d("onResponse: ", AppConfig.USER_VERSION);
                         AppConfig.TICK_NAME = res.getJSONObject(0).getString("name_votes");
                         AppConfig.CURRENCY_NAME = res.getJSONObject(0).getString("name_coin");
                         AppConfig.JOIN_ROOM_ANIMATION_LEVEL = res.getJSONObject(0).getInt("enter_tip_level");

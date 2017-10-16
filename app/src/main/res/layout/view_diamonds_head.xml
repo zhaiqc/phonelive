@@ -10,7 +10,6 @@
         android:gravity="center"
         android:orientation="vertical"
         android:background="@color/white"
-        android:id="@+id/rl_message"
         android:layout_width="match_parent"
         android:layout_height="150dp">
 
