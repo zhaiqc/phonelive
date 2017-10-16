@@ -2,7 +2,6 @@ package com.jutaotv.phonelive.ui.other;
 
 import android.content.Context;
 
-import com.ksyun.media.rtc.kit.KSYRtcStreamer;
 import com.ksyun.media.streamer.kit.KSYStreamer;
 
 

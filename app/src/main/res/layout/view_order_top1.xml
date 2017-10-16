@@ -6,7 +6,6 @@
    >
     <!--no.1-->
     <RelativeLayout
-        android:id="@+id/rl_order_no1"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

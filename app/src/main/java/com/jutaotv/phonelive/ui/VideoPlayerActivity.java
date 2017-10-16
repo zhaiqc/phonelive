@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.jutaotv.phonelive.AppConfig;
 import com.jutaotv.phonelive.AppContext;
+import com.jutaotv.phonelive.R;
 import com.jutaotv.phonelive.api.remote.ApiUtils;
 import com.jutaotv.phonelive.api.remote.PhoneLiveApi;
 import com.jutaotv.phonelive.base.ShowLiveActivityBase;
@@ -56,13 +57,11 @@ import com.jutaotv.phonelive.utils.TLog;
 import com.jutaotv.phonelive.utils.UIHelper;
 import com.jutaotv.phonelive.widget.LoadUrlImageView;
 import com.jutaotv.phonelive.widget.VideoSurfaceView;
-import com.ksyun.media.rtc.kit.RTCClient;
-import com.ksyun.media.rtc.kit.RTCConstants;
-import com.ksyun.media.streamer.kit.KSYStreamer;
-import com.ksyun.media.streamer.kit.StreamerConstants;
 import com.ksyun.media.player.IMediaPlayer;
 import com.ksyun.media.player.KSYMediaPlayer;
-import com.jutaotv.phonelive.R;
+
+import com.ksyun.media.streamer.kit.KSYStreamer;
+import com.ksyun.media.streamer.kit.StreamerConstants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -597,6 +596,7 @@ public class VideoPlayerActivity extends ShowLiveActivityBase implements View.On
         onRTCRegisterClick();
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -627,85 +627,85 @@ public class VideoPlayerActivity extends ShowLiveActivityBase implements View.On
     }
 
     //连麦监听
-    private RTCClient.RTCEventChangedListener mRTCEventListener = new RTCClient.RTCEventChangedListener() {
-        @Override
-        public void onEventChanged(int event, final Object arg1) {
-            switch (event) {
-                case RTCClient.RTC_EVENT_REGISTED:
-                    mIsRegisted = true;
-                    mCameraPreview.setVisibility(View.GONE);
-                    break;
-                case RTCClient.RTC_EVENT_STARTED:
-                    mVideoSurfaceView.setVisibility(View.GONE);
-                    if (ksyMediaPlayer != null)
-                        ksyMediaPlayer.pause();
-                    mIvLiveMeiyan.setVisibility(View.VISIBLE);
-                    mCameraPreview.setVisibility(View.VISIBLE);
-                    initBeautyUI(mStreamer);
-                    mBeautyChooseView.setVisibility(View.INVISIBLE);
-                    mRtcView.setVisibility(View.GONE);
-                    mStopLianmai.setVisibility(View.VISIBLE);
-                    mIsConnected = true;
-                    break;
-                case RTCClient.RTC_EVENT_CALL_COMMING:
-                    break;
-                case RTCClient.RTC_EVENT_STOPPED:
-                    mIsConnected = false;
-                    isRequst = false;
-                    mBeautyChooseView.setVisibility(View.INVISIBLE);
-                    mIvLiveMeiyan.setVisibility(View.GONE);
-                    mIvCameraControl.setVisibility(View.GONE);
-                    mCameraPreview.setVisibility(View.GONE);
-                    mVideoSurfaceView.setVisibility(View.VISIBLE);
-                    if (ksyMediaPlayer != null) {
-                        ksyMediaPlayer.start();
-                    }
-                    mStopLianmai.setVisibility(View.GONE);
-                    mRtcView.setVisibility(View.VISIBLE);
-                    break;
-                case RTCClient.RTC_EVENT_UNREGISTED:
-                    break;
-                default:
-                    break;
-            }
-
-        }
-    };
-    private RTCClient.RTCErrorListener mRTCErrorListener = new RTCClient.RTCErrorListener() {
-        @Override
-        public void onError(int errorType, int arg1) {
-            switch (errorType) {
-                case RTCClient.RTC_ERROR_AUTH_FAILED:
-                    mIsRegisted = false;
-                    Toast.makeText(VideoPlayerActivity.this, "连麦Auth信息获取失败，注册失败", Toast.LENGTH_SHORT).show();
-                    break;
-                case RTCClient.RTC_ERROR_REGISTED_FAILED:
-                    Toast.makeText(VideoPlayerActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
-//                    mStreamer.getRtcClient().registerRTC();
-                    break;
-                case RTCClient.RTC_ERROR_SERVER_ERROR:
-                    isRequst = false;
-                    Toast.makeText(VideoPlayerActivity.this, "连麦异常断开", Toast.LENGTH_SHORT).show();
-                    mRtcView.setVisibility(View.VISIBLE);
-                    mStopLianmai.setVisibility(View.GONE);
-                case RTCClient.RTC_ERROR_CONNECT_FAIL:
-                    Toast.makeText(VideoPlayerActivity.this, "网络不稳定，请重新连麦", Toast.LENGTH_SHORT).show();
-                    isRequst = false;
-                    mRtcView.setVisibility(View.VISIBLE);
-                    mStopLianmai.setVisibility(View.GONE);
-                    break;
-                case RTCClient.RTC_ERROR_STARTED_FAILED:
-                    mIsConnected = false;
-                    if (arg1 == 603) {
-                        Toast.makeText(VideoPlayerActivity.this, "主播拒绝连麦", Toast.LENGTH_SHORT).show();
-                    }
-                    isRequst = false;
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+//    private RTCClient.RTCEventChangedListener mRTCEventListener = new RTCClient.RTCEventChangedListener() {
+//        @Override
+//        public void onEventChanged(int event, final Object arg1) {
+//            switch (event) {
+//                case RTCClient.RTC_EVENT_REGISTED:
+//                    mIsRegisted = true;
+//                    mCameraPreview.setVisibility(View.GONE);
+//                    break;
+//                case RTCClient.RTC_EVENT_STARTED:
+//                    mVideoSurfaceView.setVisibility(View.GONE);
+//                    if (ksyMediaPlayer != null)
+//                        ksyMediaPlayer.pause();
+//                    mIvLiveMeiyan.setVisibility(View.VISIBLE);
+//                    mCameraPreview.setVisibility(View.VISIBLE);
+//                    initBeautyUI(mStreamer);
+//                    mBeautyChooseView.setVisibility(View.INVISIBLE);
+//                    mRtcView.setVisibility(View.GONE);
+//                    mStopLianmai.setVisibility(View.VISIBLE);
+//                    mIsConnected = true;
+//                    break;
+//                case RTCClient.RTC_EVENT_CALL_COMMING:
+//                    break;
+//                case RTCClient.RTC_EVENT_STOPPED:
+//                    mIsConnected = false;
+//                    isRequst = false;
+//                    mBeautyChooseView.setVisibility(View.INVISIBLE);
+//                    mIvLiveMeiyan.setVisibility(View.GONE);
+//                    mIvCameraControl.setVisibility(View.GONE);
+//                    mCameraPreview.setVisibility(View.GONE);
+//                    mVideoSurfaceView.setVisibility(View.VISIBLE);
+//                    if (ksyMediaPlayer != null) {
+//                        ksyMediaPlayer.start();
+//                    }
+//                    mStopLianmai.setVisibility(View.GONE);
+//                    mRtcView.setVisibility(View.VISIBLE);
+//                    break;
+//                case RTCClient.RTC_EVENT_UNREGISTED:
+//                    break;
+//                default:
+//                    break;
+//            }
+//
+//        }
+//    };
+//    private RTCClient.RTCErrorListener mRTCErrorListener = new RTCClient.RTCErrorListener() {
+//        @Override
+//        public void onError(int errorType, int arg1) {
+//            switch (errorType) {
+//                case RTCClient.RTC_ERROR_AUTH_FAILED:
+//                    mIsRegisted = false;
+//                    Toast.makeText(VideoPlayerActivity.this, "连麦Auth信息获取失败，注册失败", Toast.LENGTH_SHORT).show();
+//                    break;
+//                case RTCClient.RTC_ERROR_REGISTED_FAILED:
+//                    Toast.makeText(VideoPlayerActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+////                    mStreamer.getRtcClient().registerRTC();
+//                    break;
+//                case RTCClient.RTC_ERROR_SERVER_ERROR:
+//                    isRequst = false;
+//                    Toast.makeText(VideoPlayerActivity.this, "连麦异常断开", Toast.LENGTH_SHORT).show();
+//                    mRtcView.setVisibility(View.VISIBLE);
+//                    mStopLianmai.setVisibility(View.GONE);
+//                case RTCClient.RTC_ERROR_CONNECT_FAIL:
+//                    Toast.makeText(VideoPlayerActivity.this, "网络不稳定，请重新连麦", Toast.LENGTH_SHORT).show();
+//                    isRequst = false;
+//                    mRtcView.setVisibility(View.VISIBLE);
+//                    mStopLianmai.setVisibility(View.GONE);
+//                    break;
+//                case RTCClient.RTC_ERROR_STARTED_FAILED:
+//                    mIsConnected = false;
+//                    if (arg1 == 603) {
+//                        Toast.makeText(VideoPlayerActivity.this, "主播拒绝连麦", Toast.LENGTH_SHORT).show();
+//                    }
+//                    isRequst = false;
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//    };
     private KSYStreamer.OnInfoListener mOnInfoListener1 = new KSYStreamer.OnInfoListener() {
         public void onInfo(int what, int msg1, int msg2) {
             switch (what) {
@@ -1482,7 +1482,7 @@ public class VideoPlayerActivity extends ShowLiveActivityBase implements View.On
             ksyMediaPlayer.start();
 
         }
-        if (mStreamer!=null){
+        if (mStreamer != null) {
             mStreamer.startCameraPreview();
         }
 

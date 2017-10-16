@@ -48,7 +48,6 @@ import com.jutaotv.phonelive.game.LucklyPanLayout;
 import com.jutaotv.phonelive.ui.other.PhoneLivePrivateChat;
 import com.jutaotv.phonelive.widget.BlackButton;
 import com.jutaotv.phonelive.widget.danmu.DanmuControl;
-import com.ksyun.media.rtc.kit.RTCConstants;
 import com.ksyun.media.streamer.capture.camera.CameraTouchHelper;
 import com.ksyun.media.streamer.filter.imgtex.ImgBeautyProFilter;
 import com.ksyun.media.streamer.filter.imgtex.ImgFilterBase;

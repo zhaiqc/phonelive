@@ -10,7 +10,6 @@
         android:layout_height="340dp">
         <!--顶部-->
         <LinearLayout
-            android:id="@+id/dialog_rl_top_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -90,7 +89,6 @@
                         android:layout_marginLeft="5dp" />
 
                     <ImageView
-                        android:id="@+id/iv_dialog_renzheng"
                         android:layout_width="20dp"
                         android:layout_height="20dp" />
                 </LinearLayout>
@@ -125,7 +123,6 @@
                 <!--签名-->
 
                 <TextView
-                    android:id="@+id/tv_user_info_sign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

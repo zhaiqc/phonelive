@@ -26,7 +26,6 @@
 
         <com.jutaotv.phonelive.widget.BlackTextView
             android:layout_centerVertical="true"
-            android:id="@+id/tv_avatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/space_4"
@@ -81,7 +80,6 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_16" />
         <ImageView
-            android:id="@+id/iv_nick2"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,7 +117,6 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_16" />
         <ImageView
-            android:id="@+id/iv_sign3"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -129,7 +126,6 @@
     <View
         style="@style/h_line" />
     <RelativeLayout
-        android:id="@+id/rl_userBirthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -137,7 +133,6 @@
         android:padding="@dimen/space_16" >
 
         <com.jutaotv.phonelive.widget.BlackTextView
-            android:id="@+id/tv_birthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/space_4"
